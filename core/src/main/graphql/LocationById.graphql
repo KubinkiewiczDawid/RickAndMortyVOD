@@ -1,0 +1,5 @@
+query LocationById($id:ID!) {
+    location(id: $id) {
+        ...LocationDetails
+    }
+}

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1006969152952",
+    "project_id": "androidmobileaca-1631692601548",
+    "storage_bucket": "androidmobileaca-1631692601548.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006969152952:android:d5ef8bfc7e059a13a99b4d",
+        "android_client_info": {
+          "package_name": "com.intive.androidmobileacademy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1006969152952-fjj3kk8sbsstg0snf46inbku1m0l4ok1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt6OOYsVfxNfq22xbFzSftXpT1WEjlZTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1006969152952-fjj3kk8sbsstg0snf46inbku1m0l4ok1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

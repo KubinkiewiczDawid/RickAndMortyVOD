@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_package = "com.dawidk.core.datastore";
+option java_multiple_files = true;
+
+message HomeScreenItem {
+  enum ItemType {
+    CHARACTER = 0;
+    EPISODE = 1;
+    LOCATION = 2;
+  }
+  ItemType type = 1;
+  string itemId = 2;
+}
+
+message ItemsList {
+  repeated HomeScreenItem items = 1;
+}
+
+message HomeScreenContents {
+  repeated ItemsList playlists = 1;
+  repeated ItemsList carousel = 2;
+  int64 timestamp = 3;
+  repeated string lastSeenEpisodeId = 4;
+  string lastSeenCharacterId = 5;
+}

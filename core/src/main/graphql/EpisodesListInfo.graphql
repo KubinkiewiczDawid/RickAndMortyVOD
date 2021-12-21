@@ -1,0 +1,7 @@
+query EpisodesListInfo($filter: FilterEpisode) {
+    episodes(filter: $filter) {
+        info {
+            ...InfoDetails
+        }
+    }
+}

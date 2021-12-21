@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="@dimen/playlist_item_width"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/card_margin"
+    android:background="@color/card_background_color"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true"
+    card_view:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/card_background_color">
+
+        <ImageView
+            android:id="@+id/location_image_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/space_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="@integer/playlist_item_image_height_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/location_playlist_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/grid_8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_img"
+            app:layout_constraintBottom_toBottomOf="@+id/location_image_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="@integer/playlist_item_image_height_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/location_playlist_item_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/grid_4"
+            android:background="@color/card_background_color"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="@integer/name_text_max_lines"
+            android:paddingTop="@dimen/grid_4"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tile_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="@integer/playlist_item_text_height_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location_image_background" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+

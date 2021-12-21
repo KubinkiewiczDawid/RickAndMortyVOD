@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splash_screen_header_height">400dp</dimen>
+    <dimen name="splash_screen_padding">20dp</dimen>
+    <item name="splash_screen_name_height_percent" format="float" type="integer">0.55</item>
+    <item name="splash_screen_logo_height_percent" format="float" type="integer">0.27</item>
+    <item name="splash_screen_logo_width_percent" format="float" type="integer">0.49</item>
+
+    <item name="pivot_x_value" format="float" type="dimen">0.5</item>
+    <item name="pivot_y_value" format="float" type="dimen">0.5</item>
+    <dimen name="setting_item_height">30dp</dimen>
+</resources>

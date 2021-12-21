@@ -1,0 +1,73 @@
+{
+  "data": {
+    "locations": {
+      "__typename": "Locations",
+      "results": [
+        {
+          "__typename": "Location",
+          "id": "54",
+          "name": "Vindicator's Base",
+          "type": "Spacecraft",
+          "dimension": "unknown",
+          "residents": [
+            {
+              "__typename": "Character",
+              "id": "252",
+              "name": "Noob-Noob",
+              "status": "Alive",
+              "species": "Poopybutthole",
+              "type": "",
+              "gender": "Male",
+              "origin": {
+                "__typename": "Location",
+                "name": "unknown"
+              },
+              "image": "https://rickandmortyapi.com/api/character/avatar/252.jpeg",
+              "episode": [
+                {
+                  "__typename": "Episode",
+                  "id": "25",
+                  "name": "Vindicators 3: The Return of Worldender"
+                }
+              ],
+              "created": "2017-12-31T12:57:37.849Z"
+            }
+          ],
+          "created": "2017-12-31T12:57:37.824Z"
+        },
+        {
+          "__typename": "Location",
+          "id": "107",
+          "name": "Defiance's Ship",
+          "type": "Spacecraft",
+          "dimension": "Replacement Dimension",
+          "residents": [
+            {
+              "__typename": "Character",
+              "id": "668",
+              "name": "Defiance Squanchette",
+              "status": "Alive",
+              "species": "Alien",
+              "type": "Cat-Person",
+              "gender": "Female",
+              "origin": {
+                "__typename": "Location",
+                "name": "Planet Squanch"
+              },
+              "image": "https://rickandmortyapi.com/api/character/avatar/668.jpeg",
+              "episode": [
+                {
+                  "__typename": "Episode",
+                  "id": "41",
+                  "name": "Star Mort: Rickturn of the Jerri"
+                }
+              ],
+              "created": "2020-08-13T12:52:36.873Z"
+            }
+          ],
+          "created": "2020-08-13T13:05:33.161Z"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+query EpisodesList($page:Int, $filter: FilterEpisode) {
+    episodes(page:$page, filter: $filter) {
+        info {
+            ...InfoDetails
+        }
+
+        results {
+            ...EpisodeDetails
+        }
+    }
+}

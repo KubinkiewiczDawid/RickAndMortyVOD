@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/card_background_color">
+
+    <ImageView
+        android:id="@+id/episode_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@integer/details_image_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/episode_progress_bar"
+        style="@android:style/Widget.Material.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-6dp"
+        android:layout_marginBottom="-6dp"
+        android:progress="0"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/episode_image_view"
+        app:layout_constraintStart_toStartOf="@id/episode_image_view" />
+
+    <ImageView
+        android:id="@+id/episode_details_play_button"
+        android:layout_width="@dimen/episode_details_play_button_size"
+        android:layout_height="@dimen/episode_details_play_button_size"
+        android:layout_margin="@dimen/grid_8"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_play"
+        app:layout_constraintBottom_toBottomOf="@+id/episode_image_view"
+        app:layout_constraintEnd_toEndOf="@+id/episode_image_view"
+        app:layout_constraintStart_toStartOf="@+id/episode_image_view"
+        app:layout_constraintTop_toTopOf="@+id/episode_image_view" />
+
+    <TextView
+        android:id="@+id/episodeSeasonText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/list_item_name_font_size_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/episode_image_view" />
+
+    <TextView
+        android:id="@+id/episodeNameHeaderText"
+        android:layout_width="@dimen/header_width"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:text="@string/episode_name_header"
+        android:textColor="@color/header_font_color"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/episodeSeasonText" />
+
+    <TextView
+        android:id="@+id/episodeNameText"
+        android:layout_width="@dimen/episode_details_name_width"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toEndOf="@+id/episodeNameHeaderText"
+        app:layout_constraintTop_toBottomOf="@+id/episodeSeasonText" />
+
+    <TextView
+        android:id="@+id/episodeAirDateHeaderText"
+        android:layout_width="@dimen/header_width"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:text="@string/air_date_header"
+        android:textColor="@color/header_font_color"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/episodeNameText" />
+
+    <TextView
+        android:id="@+id/episodeAirDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:paddingBottom="@dimen/grid_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toEndOf="@+id/episodeAirDateHeaderText"
+        app:layout_constraintTop_toBottomOf="@+id/episodeNameText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

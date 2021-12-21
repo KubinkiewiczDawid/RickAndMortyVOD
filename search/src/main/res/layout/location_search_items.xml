@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ListTilesCardStyle">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/card_background_color">
+
+        <ImageView
+            android:id="@+id/location_image_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/space_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="@integer/search_item_image_height_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/location_playlist_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/grid_8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_img"
+            app:layout_constraintBottom_toBottomOf="@+id/location_image_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="@integer/search_item_image_height_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/location_playlist_item_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/grid_4"
+            android:background="@color/card_background_color"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="@integer/name_text_max_lines"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tile_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location_image_background" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

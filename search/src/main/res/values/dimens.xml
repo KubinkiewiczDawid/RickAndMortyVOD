@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="search_item_text_height">120dp</dimen>
+    <dimen name="search_item_image_width">200dp</dimen>
+    <dimen name="search_item_image_height">200dp</dimen>
+
+    <dimen name="search_item_width">193dp</dimen>
+    <item name="search_item_height_percent" format="float" type="dimen">0.44</item>
+    <item name="search_item_width_percent" format="float" type="dimen">0.48</item>
+    <item name="search_item_text_height_percent" format="float" type="integer">0.375</item>
+    <item name="search_item_text_width_percent" format="float" type="integer">1</item>
+    <item name="search_item_image_height_percent" format="float" type="integer">0.61</item>
+    <item name="search_item_image_width_percent" format="float" type="integer">0.92</item>
+</resources>

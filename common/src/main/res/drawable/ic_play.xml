@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="72"
+    android:viewportHeight="72">
+    <path
+        android:name="backgroundPath"
+        android:fillAlpha="0.80"
+        android:fillColor="@color/background_color"
+        android:pathData="M36,36m-36,0a36,36 0,1 1,72 0a36,36 0,1 1,-72 0" />
+    <group
+        android:name="icon"
+        android:pivotX="36"
+        android:pivotY="36">
+        <path
+            android:name="foregroundPath"
+            android:fillColor="@android:color/white"
+            android:pathData="m46.521,35.183c0.3193,0.1824 0.4789,0.4689 0.4789,0.8597 0,0.3386 -0.1596,0.5992 -0.4789,0.7815l-14.526,8.792c-0.5055,0.3907 -0.971,0.4819 -1.3967,0.2735 -0.3991,-0.2605 -0.5986,-0.7164 -0.5986,-1.3676v-17.076c0,-0.6513 0.1995,-1.0941 0.5986,-1.3286 0.4257,-0.2084 0.8912,-0.1432 1.3967,0.1954l14.526,8.8701z" />
+    </group>
+</vector>

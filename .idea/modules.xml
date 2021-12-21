@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.iml" filepath="$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.iml" filepath="$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.iml" filepath="$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.iml" filepath="$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.iml" filepath="$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.iml" filepath="$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.iml" filepath="$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.iml" filepath="$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.iml" filepath="$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.iml" />
+    </modules>
+  </component>
+</project>

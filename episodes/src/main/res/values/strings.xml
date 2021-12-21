@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="episode_name_header">Name:</string>
+    <string name="season_name_header">Season:</string>
+    <string name="episodeAirDateHeader">Air date:</string>
+    <string name="air_date_header">Air date:</string>
+    <string name="all_seasons">All seasons</string>
+    <string name="all">all</string>
+    <string name="season">Season</string>
+</resources>

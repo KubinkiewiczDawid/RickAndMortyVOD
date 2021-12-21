@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="card_background_color">#3c3e44</color>
+    <color name="card_background_darker_color">#2C2D32</color>
+    <color name="header_font_color">#D0D0D0</color>
+    <color name="background_color">#24282f</color>
+    <color name="background_darker_color">#1F2329</color>
+    <color name="dark_font_color">#24282f</color>
+
+    <color name="geebung">#D58821</color>
+    <color name="sea_buckthorn">#FDA92B</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="black_with_alpha">#50000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="tuna">#3c3e43</color>
+
+    <color name="colorIcon">#FFFFFFFF</color>
+    <color name="colorNavbarBackground">#CE3C3E43</color>
+    <color name="activityBackground">#24282f</color>
+
+    <color name="colorToolbarTextColor">#3c3e43</color>
+    <color name="colorToolbarBackButton">#3c3e43</color>
+</resources>
