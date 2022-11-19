@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup.curtains:curtains:1.0.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/551bfda47d58aa6308aa310aed381590/transformed/curtains-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b8bc0f3eb8b437afa9cc4579dd1adf52/transformed/curtains-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f85d7fe7a75f46cd8059af121ed47cbe/transformed/curtains-1.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f85d7fe7a75f46cd8059af121ed47cbe/transformed/curtains-1.0.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.curtains/curtains/1.0.1/add3786f162ada0ec25e07108130b683cd8fec4a/curtains-1.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.curtains/curtains/1.0.1/6f9404cbd8a741151cbf827560dcea3d54e80ed7/curtains-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

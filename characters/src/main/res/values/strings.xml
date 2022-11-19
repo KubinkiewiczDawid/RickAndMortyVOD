@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="last_known_location">Last known location:</string>
+    <string name="first_seen_in">First seen in:</string>
+    <string name="origin_name">Origin:</string>
+    <string name="created_header">Created:</string>
+    <string name="gender_header">Gender:</string>
+    <string name="species_header">Species:</string>
+    <string name="episodes">Episodes</string>
+    <string name="locations">Locations</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="air_date">Air date:</string>
+    <string name="episode">Episode:</string>
+    <string name="type_header">Type:</string>
+    <string name="dimension_header">Dimension:</string>
+
+    <string-array name="character_details_tabs">
+        <item>@string/episodes</item>
+        <item>@string/locations</item>
+    </string-array>
+
+    <string name="created_date_delimiter">T</string>
+
+</resources>

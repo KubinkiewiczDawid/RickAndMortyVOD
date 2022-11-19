@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="status_dead">#FF0000</color>
+    <color name="status_alive">#55cb44</color>
+    <color name="status_unknown">#808080</color>
+</resources>

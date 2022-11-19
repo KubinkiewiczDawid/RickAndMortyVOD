@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/card_background_color">
+
+    <TextView
+        android:id="@+id/episodeCharactersHeaderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:paddingBottom="@dimen/grid_8"
+        android:text="@string/characters"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/grid_8"
+        android:background="@color/geebung"
+        app:layout_constraintTop_toBottomOf="@id/episodeCharactersHeaderText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

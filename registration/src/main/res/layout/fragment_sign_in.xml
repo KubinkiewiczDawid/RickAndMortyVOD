@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sign_in_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/grid_24"
+    tools:background="@color/background_color"
+    tools:context="com.dawidk.registration.SignInFragment">
+
+    <TextView
+        android:id="@+id/sing_in_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/grid_24"
+        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/grid_8"
+        android:text="@string/sign_in"
+        android:textColor="@color/white"
+        android:textSize="@dimen/list_item_name_font_size_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sign_in_email_error_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sing_in_text_view" />
+
+    <EditText
+        android:id="@+id/email_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_8"
+        android:layout_marginBottom="@dimen/grid_8"
+        android:autofillHints="emailAddress"
+        android:background="@color/white"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/grid_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_email_error_text_view" />
+
+
+    <TextView
+        android:id="@+id/sign_in_password_error_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_8"
+        android:textColor="@color/red"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
+
+    <EditText
+        android:id="@+id/password_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_8"
+        android:layout_marginBottom="@dimen/grid_8"
+        android:autofillHints="password"
+        android:background="@color/white"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:padding="@dimen/grid_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_password_error_text_view" />
+
+    <Button
+        android:id="@+id/email_sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_4"
+        android:layout_marginBottom="@dimen/grid_4"
+        android:text="@string/sign_in"
+        android:textAllCaps="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
+
+    <TextView
+        android:id="@+id/or_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_4"
+        android:layout_marginBottom="@dimen/grid_4"
+        android:gravity="center_horizontal"
+        android:text="@string/or_header"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_sign_in_button" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/google_sign_in_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_4"
+        android:layout_marginBottom="@dimen/grid_4"
+        android:gravity="center"
+        android:text="@string/sign_in_with_google_text"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/ic_icons8_google"
+        app:iconGravity="textStart"
+        app:iconPadding="10dp"
+        app:iconTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/or_text_view" />
+
+    <TextView
+        android:id="@+id/sign_up_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_16"
+        android:text="@string/sign_up_header"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/sign_up_link"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/google_sign_in_button" />
+
+    <TextView
+        android:id="@+id/sign_up_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/grid_16"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingStart="@dimen/grid_4"
+        android:text="@string/sign_up_link"
+        android:textColor="@color/sea_buckthorn"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sign_up_header"
+        app:layout_constraintTop_toBottomOf="@+id/google_sign_in_button" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

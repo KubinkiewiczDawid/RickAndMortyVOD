@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/navigation">
+
+    <navigation
+        android:id="@+id/navigation"
+        app:startDestination="@id/home_nav_graph">
+        <include app:graph="@navigation/registration_nav_graph" />
+        <include app:graph="@navigation/characters_nav_graph" />
+        <include app:graph="@navigation/location_nav_graph" />
+        <include app:graph="@navigation/search_nav_graph" />
+        <include app:graph="@navigation/episodes_nav_graph" />
+        <include app:graph="@navigation/home_nav_graph" />
+        <include app:graph="@navigation/settings_nav_graph" />
+        <action
+            android:id="@+id/action_fragmentContainer_to_HomeFragment"
+            app:destination="@id/home_nav_graph" />
+        <action
+            android:id="@+id/action_fragmentContainer_to_settingsFragment"
+            app:destination="@id/settings_nav_graph" />
+        <include app:graph="@navigation/videoplayer_nav_graph" />
+        <action
+            android:id="@+id/action_fragmentContainer_to_CharacterDetailsFragment"
+            app:destination="@id/characterDetailsFragment" />
+        <fragment
+            android:id="@+id/characterDetailsFragment"
+            android:name="com.dawidk.characters.characterDetails.CharacterDetailsFragment"
+            android:label="CharacterDetailsFragment">
+            <deepLink app:uri="https://www.rickandmortyvod.dawidk.com/characterDetails/{id}" />
+            <argument
+                android:name="id"
+                android:defaultValue="1"
+                app:argType="string" />
+        </fragment>
+        <action
+            android:id="@+id/action_fragmentContainer_to_EpisodeDetailsFragment"
+            app:destination="@id/episodeDetailsFragment" />
+        <fragment
+            android:id="@+id/episodeDetailsFragment"
+            android:name="com.dawidk.episodes.episodeDetails.EpisodeDetailsFragment"
+            android:label="fragment_episode_details">
+            <deepLink app:uri="https://www.rickandmortyvod.dawidk.com/episodeDetails/{id}" />
+            <argument
+                android:name="id"
+                android:defaultValue="1"
+                app:argType="string" />
+        </fragment>
+    </navigation>
+</navigation>

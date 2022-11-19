@@ -1,0 +1,31 @@
+fragment CharacterDetails on Character {
+    id
+    name
+    status
+    species
+    type
+    gender
+    origin {
+        id
+        name
+    }
+    location {
+        id
+        name
+        type
+        dimension
+    }
+    image
+    episode {
+        id
+        name
+        air_date
+        episode
+        characters {
+            id
+            name
+            image
+        }
+    }
+    created
+}

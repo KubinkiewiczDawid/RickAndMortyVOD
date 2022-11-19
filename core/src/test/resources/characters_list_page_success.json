@@ -1,0 +1,1439 @@
+{
+  "data": {
+    "characters": {
+      "__typename": "Characters",
+      "results": [
+        {
+          "__typename": "Character",
+          "id": "1",
+          "name": "Rick Sanchez",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "1",
+            "name": "Earth (C-137)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "1",
+              "name": "Pilot"
+            },
+            {
+              "__typename": "Episode",
+              "id": "2",
+              "name": "Lawnmower Dog"
+            },
+            {
+              "__typename": "Episode",
+              "id": "3",
+              "name": "Anatomy Park"
+            },
+            {
+              "__typename": "Episode",
+              "id": "4",
+              "name": "M. Night Shaym-Aliens!"
+            },
+            {
+              "__typename": "Episode",
+              "id": "5",
+              "name": "Meeseeks and Destroy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "6",
+              "name": "Rick Potion #9"
+            },
+            {
+              "__typename": "Episode",
+              "id": "7",
+              "name": "Raising Gazorpazorp"
+            },
+            {
+              "__typename": "Episode",
+              "id": "8",
+              "name": "Rixty Minutes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "9",
+              "name": "Something Ricked This Way Comes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            },
+            {
+              "__typename": "Episode",
+              "id": "11",
+              "name": "Ricksy Business"
+            },
+            {
+              "__typename": "Episode",
+              "id": "12",
+              "name": "A Rickle in Time"
+            },
+            {
+              "__typename": "Episode",
+              "id": "13",
+              "name": "Mortynight Run"
+            },
+            {
+              "__typename": "Episode",
+              "id": "14",
+              "name": "Auto Erotic Assimilation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "15",
+              "name": "Total Rickall"
+            },
+            {
+              "__typename": "Episode",
+              "id": "16",
+              "name": "Get Schwifty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "17",
+              "name": "The Ricks Must Be Crazy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "18",
+              "name": "Big Trouble in Little Sanchez"
+            },
+            {
+              "__typename": "Episode",
+              "id": "19",
+              "name": "Interdimensional Cable 2: Tempting Fate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "20",
+              "name": "Look Who's Purging Now"
+            },
+            {
+              "__typename": "Episode",
+              "id": "21",
+              "name": "The Wedding Squanchers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "22",
+              "name": "The Rickshank Rickdemption"
+            },
+            {
+              "__typename": "Episode",
+              "id": "23",
+              "name": "Rickmancing the Stone"
+            },
+            {
+              "__typename": "Episode",
+              "id": "24",
+              "name": "Pickle Rick"
+            },
+            {
+              "__typename": "Episode",
+              "id": "25",
+              "name": "Vindicators 3: The Return of Worldender"
+            },
+            {
+              "__typename": "Episode",
+              "id": "26",
+              "name": "The Whirly Dirly Conspiracy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "27",
+              "name": "Rest and Ricklaxation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            },
+            {
+              "__typename": "Episode",
+              "id": "29",
+              "name": "Morty's Mind Blowers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "30",
+              "name": "The ABC's of Beth"
+            },
+            {
+              "__typename": "Episode",
+              "id": "31",
+              "name": "The Rickchurian Mortydate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "32",
+              "name": "Edge of Tomorty: Rick, Die, Rickpeat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "33",
+              "name": "The Old Man and the Seat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "34",
+              "name": "One Crew Over the Crewcoo's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "35",
+              "name": "Claw and Hoarder: Special Ricktim's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "36",
+              "name": "Rattlestar Ricklactica"
+            },
+            {
+              "__typename": "Episode",
+              "id": "37",
+              "name": "Never Ricking Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "38",
+              "name": "Promortyus"
+            },
+            {
+              "__typename": "Episode",
+              "id": "39",
+              "name": "The Vat of Acid Episode"
+            },
+            {
+              "__typename": "Episode",
+              "id": "40",
+              "name": "Childrick of Mort"
+            },
+            {
+              "__typename": "Episode",
+              "id": "41",
+              "name": "Star Mort: Rickturn of the Jerri"
+            }
+          ],
+          "created": "2017-11-04T18:48:46.250Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "2",
+          "name": "Morty Smith",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "1",
+            "name": "Earth (C-137)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "1",
+              "name": "Pilot"
+            },
+            {
+              "__typename": "Episode",
+              "id": "2",
+              "name": "Lawnmower Dog"
+            },
+            {
+              "__typename": "Episode",
+              "id": "3",
+              "name": "Anatomy Park"
+            },
+            {
+              "__typename": "Episode",
+              "id": "4",
+              "name": "M. Night Shaym-Aliens!"
+            },
+            {
+              "__typename": "Episode",
+              "id": "5",
+              "name": "Meeseeks and Destroy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "6",
+              "name": "Rick Potion #9"
+            },
+            {
+              "__typename": "Episode",
+              "id": "7",
+              "name": "Raising Gazorpazorp"
+            },
+            {
+              "__typename": "Episode",
+              "id": "8",
+              "name": "Rixty Minutes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "9",
+              "name": "Something Ricked This Way Comes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            },
+            {
+              "__typename": "Episode",
+              "id": "11",
+              "name": "Ricksy Business"
+            },
+            {
+              "__typename": "Episode",
+              "id": "12",
+              "name": "A Rickle in Time"
+            },
+            {
+              "__typename": "Episode",
+              "id": "13",
+              "name": "Mortynight Run"
+            },
+            {
+              "__typename": "Episode",
+              "id": "14",
+              "name": "Auto Erotic Assimilation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "15",
+              "name": "Total Rickall"
+            },
+            {
+              "__typename": "Episode",
+              "id": "16",
+              "name": "Get Schwifty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "17",
+              "name": "The Ricks Must Be Crazy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "18",
+              "name": "Big Trouble in Little Sanchez"
+            },
+            {
+              "__typename": "Episode",
+              "id": "19",
+              "name": "Interdimensional Cable 2: Tempting Fate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "20",
+              "name": "Look Who's Purging Now"
+            },
+            {
+              "__typename": "Episode",
+              "id": "21",
+              "name": "The Wedding Squanchers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "22",
+              "name": "The Rickshank Rickdemption"
+            },
+            {
+              "__typename": "Episode",
+              "id": "23",
+              "name": "Rickmancing the Stone"
+            },
+            {
+              "__typename": "Episode",
+              "id": "24",
+              "name": "Pickle Rick"
+            },
+            {
+              "__typename": "Episode",
+              "id": "25",
+              "name": "Vindicators 3: The Return of Worldender"
+            },
+            {
+              "__typename": "Episode",
+              "id": "26",
+              "name": "The Whirly Dirly Conspiracy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "27",
+              "name": "Rest and Ricklaxation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            },
+            {
+              "__typename": "Episode",
+              "id": "29",
+              "name": "Morty's Mind Blowers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "30",
+              "name": "The ABC's of Beth"
+            },
+            {
+              "__typename": "Episode",
+              "id": "31",
+              "name": "The Rickchurian Mortydate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "32",
+              "name": "Edge of Tomorty: Rick, Die, Rickpeat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "33",
+              "name": "The Old Man and the Seat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "34",
+              "name": "One Crew Over the Crewcoo's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "35",
+              "name": "Claw and Hoarder: Special Ricktim's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "36",
+              "name": "Rattlestar Ricklactica"
+            },
+            {
+              "__typename": "Episode",
+              "id": "37",
+              "name": "Never Ricking Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "38",
+              "name": "Promortyus"
+            },
+            {
+              "__typename": "Episode",
+              "id": "39",
+              "name": "The Vat of Acid Episode"
+            },
+            {
+              "__typename": "Episode",
+              "id": "40",
+              "name": "Childrick of Mort"
+            },
+            {
+              "__typename": "Episode",
+              "id": "41",
+              "name": "Star Mort: Rickturn of the Jerri"
+            }
+          ],
+          "created": "2017-11-04T18:50:21.651Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "3",
+          "name": "Summer Smith",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Female",
+          "origin": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "6",
+              "name": "Rick Potion #9"
+            },
+            {
+              "__typename": "Episode",
+              "id": "7",
+              "name": "Raising Gazorpazorp"
+            },
+            {
+              "__typename": "Episode",
+              "id": "8",
+              "name": "Rixty Minutes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "9",
+              "name": "Something Ricked This Way Comes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            },
+            {
+              "__typename": "Episode",
+              "id": "11",
+              "name": "Ricksy Business"
+            },
+            {
+              "__typename": "Episode",
+              "id": "12",
+              "name": "A Rickle in Time"
+            },
+            {
+              "__typename": "Episode",
+              "id": "14",
+              "name": "Auto Erotic Assimilation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "15",
+              "name": "Total Rickall"
+            },
+            {
+              "__typename": "Episode",
+              "id": "16",
+              "name": "Get Schwifty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "17",
+              "name": "The Ricks Must Be Crazy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "18",
+              "name": "Big Trouble in Little Sanchez"
+            },
+            {
+              "__typename": "Episode",
+              "id": "19",
+              "name": "Interdimensional Cable 2: Tempting Fate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "20",
+              "name": "Look Who's Purging Now"
+            },
+            {
+              "__typename": "Episode",
+              "id": "21",
+              "name": "The Wedding Squanchers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "22",
+              "name": "The Rickshank Rickdemption"
+            },
+            {
+              "__typename": "Episode",
+              "id": "23",
+              "name": "Rickmancing the Stone"
+            },
+            {
+              "__typename": "Episode",
+              "id": "24",
+              "name": "Pickle Rick"
+            },
+            {
+              "__typename": "Episode",
+              "id": "25",
+              "name": "Vindicators 3: The Return of Worldender"
+            },
+            {
+              "__typename": "Episode",
+              "id": "26",
+              "name": "The Whirly Dirly Conspiracy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "27",
+              "name": "Rest and Ricklaxation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "29",
+              "name": "Morty's Mind Blowers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "30",
+              "name": "The ABC's of Beth"
+            },
+            {
+              "__typename": "Episode",
+              "id": "31",
+              "name": "The Rickchurian Mortydate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "32",
+              "name": "Edge of Tomorty: Rick, Die, Rickpeat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "33",
+              "name": "The Old Man and the Seat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "34",
+              "name": "One Crew Over the Crewcoo's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "35",
+              "name": "Claw and Hoarder: Special Ricktim's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "36",
+              "name": "Rattlestar Ricklactica"
+            },
+            {
+              "__typename": "Episode",
+              "id": "38",
+              "name": "Promortyus"
+            },
+            {
+              "__typename": "Episode",
+              "id": "39",
+              "name": "The Vat of Acid Episode"
+            },
+            {
+              "__typename": "Episode",
+              "id": "40",
+              "name": "Childrick of Mort"
+            },
+            {
+              "__typename": "Episode",
+              "id": "41",
+              "name": "Star Mort: Rickturn of the Jerri"
+            }
+          ],
+          "created": "2017-11-04T19:09:56.428Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "4",
+          "name": "Beth Smith",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Female",
+          "origin": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "6",
+              "name": "Rick Potion #9"
+            },
+            {
+              "__typename": "Episode",
+              "id": "7",
+              "name": "Raising Gazorpazorp"
+            },
+            {
+              "__typename": "Episode",
+              "id": "8",
+              "name": "Rixty Minutes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "9",
+              "name": "Something Ricked This Way Comes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            },
+            {
+              "__typename": "Episode",
+              "id": "11",
+              "name": "Ricksy Business"
+            },
+            {
+              "__typename": "Episode",
+              "id": "12",
+              "name": "A Rickle in Time"
+            },
+            {
+              "__typename": "Episode",
+              "id": "14",
+              "name": "Auto Erotic Assimilation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "15",
+              "name": "Total Rickall"
+            },
+            {
+              "__typename": "Episode",
+              "id": "16",
+              "name": "Get Schwifty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "18",
+              "name": "Big Trouble in Little Sanchez"
+            },
+            {
+              "__typename": "Episode",
+              "id": "19",
+              "name": "Interdimensional Cable 2: Tempting Fate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "20",
+              "name": "Look Who's Purging Now"
+            },
+            {
+              "__typename": "Episode",
+              "id": "21",
+              "name": "The Wedding Squanchers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "22",
+              "name": "The Rickshank Rickdemption"
+            },
+            {
+              "__typename": "Episode",
+              "id": "23",
+              "name": "Rickmancing the Stone"
+            },
+            {
+              "__typename": "Episode",
+              "id": "24",
+              "name": "Pickle Rick"
+            },
+            {
+              "__typename": "Episode",
+              "id": "25",
+              "name": "Vindicators 3: The Return of Worldender"
+            },
+            {
+              "__typename": "Episode",
+              "id": "26",
+              "name": "The Whirly Dirly Conspiracy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "27",
+              "name": "Rest and Ricklaxation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            },
+            {
+              "__typename": "Episode",
+              "id": "29",
+              "name": "Morty's Mind Blowers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "30",
+              "name": "The ABC's of Beth"
+            },
+            {
+              "__typename": "Episode",
+              "id": "31",
+              "name": "The Rickchurian Mortydate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "32",
+              "name": "Edge of Tomorty: Rick, Die, Rickpeat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "33",
+              "name": "The Old Man and the Seat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "34",
+              "name": "One Crew Over the Crewcoo's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "35",
+              "name": "Claw and Hoarder: Special Ricktim's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "36",
+              "name": "Rattlestar Ricklactica"
+            },
+            {
+              "__typename": "Episode",
+              "id": "38",
+              "name": "Promortyus"
+            },
+            {
+              "__typename": "Episode",
+              "id": "39",
+              "name": "The Vat of Acid Episode"
+            },
+            {
+              "__typename": "Episode",
+              "id": "40",
+              "name": "Childrick of Mort"
+            },
+            {
+              "__typename": "Episode",
+              "id": "41",
+              "name": "Star Mort: Rickturn of the Jerri"
+            }
+          ],
+          "created": "2017-11-04T19:22:43.665Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "5",
+          "name": "Jerry Smith",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/5.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "6",
+              "name": "Rick Potion #9"
+            },
+            {
+              "__typename": "Episode",
+              "id": "7",
+              "name": "Raising Gazorpazorp"
+            },
+            {
+              "__typename": "Episode",
+              "id": "8",
+              "name": "Rixty Minutes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "9",
+              "name": "Something Ricked This Way Comes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            },
+            {
+              "__typename": "Episode",
+              "id": "11",
+              "name": "Ricksy Business"
+            },
+            {
+              "__typename": "Episode",
+              "id": "12",
+              "name": "A Rickle in Time"
+            },
+            {
+              "__typename": "Episode",
+              "id": "13",
+              "name": "Mortynight Run"
+            },
+            {
+              "__typename": "Episode",
+              "id": "14",
+              "name": "Auto Erotic Assimilation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "15",
+              "name": "Total Rickall"
+            },
+            {
+              "__typename": "Episode",
+              "id": "16",
+              "name": "Get Schwifty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "18",
+              "name": "Big Trouble in Little Sanchez"
+            },
+            {
+              "__typename": "Episode",
+              "id": "19",
+              "name": "Interdimensional Cable 2: Tempting Fate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "20",
+              "name": "Look Who's Purging Now"
+            },
+            {
+              "__typename": "Episode",
+              "id": "21",
+              "name": "The Wedding Squanchers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "22",
+              "name": "The Rickshank Rickdemption"
+            },
+            {
+              "__typename": "Episode",
+              "id": "23",
+              "name": "Rickmancing the Stone"
+            },
+            {
+              "__typename": "Episode",
+              "id": "26",
+              "name": "The Whirly Dirly Conspiracy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "29",
+              "name": "Morty's Mind Blowers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "30",
+              "name": "The ABC's of Beth"
+            },
+            {
+              "__typename": "Episode",
+              "id": "31",
+              "name": "The Rickchurian Mortydate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "32",
+              "name": "Edge of Tomorty: Rick, Die, Rickpeat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "33",
+              "name": "The Old Man and the Seat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "35",
+              "name": "Claw and Hoarder: Special Ricktim's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "36",
+              "name": "Rattlestar Ricklactica"
+            },
+            {
+              "__typename": "Episode",
+              "id": "38",
+              "name": "Promortyus"
+            },
+            {
+              "__typename": "Episode",
+              "id": "39",
+              "name": "The Vat of Acid Episode"
+            },
+            {
+              "__typename": "Episode",
+              "id": "40",
+              "name": "Childrick of Mort"
+            },
+            {
+              "__typename": "Episode",
+              "id": "41",
+              "name": "Star Mort: Rickturn of the Jerri"
+            }
+          ],
+          "created": "2017-11-04T19:26:56.301Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "6",
+          "name": "Abadango Cluster Princess",
+          "status": "Alive",
+          "species": "Alien",
+          "type": "",
+          "gender": "Female",
+          "origin": {
+            "__typename": "Location",
+            "id": "2",
+            "name": "Abadango"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "2",
+            "name": "Abadango"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "27",
+              "name": "Rest and Ricklaxation"
+            }
+          ],
+          "created": "2017-11-04T19:50:28.250Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "7",
+          "name": "Abradolf Lincler",
+          "status": "unknown",
+          "species": "Human",
+          "type": "Genetic experiment",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "21",
+            "name": "Testicle Monster Dimension"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/7.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            },
+            {
+              "__typename": "Episode",
+              "id": "11",
+              "name": "Ricksy Business"
+            }
+          ],
+          "created": "2017-11-04T19:59:20.523Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "8",
+          "name": "Adjudicator Rick",
+          "status": "Dead",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/8.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-11-04T20:03:34.737Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "9",
+          "name": "Agency Director",
+          "status": "Dead",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/9.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "24",
+              "name": "Pickle Rick"
+            }
+          ],
+          "created": "2017-11-04T20:06:54.976Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "10",
+          "name": "Alan Rails",
+          "status": "Dead",
+          "species": "Human",
+          "type": "Superhuman (Ghost trains summoner)",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "4",
+            "name": "Worldender's lair"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/10.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "25",
+              "name": "Vindicators 3: The Return of Worldender"
+            }
+          ],
+          "created": "2017-11-04T20:19:09.017Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "11",
+          "name": "Albert Einstein",
+          "status": "Dead",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "1",
+            "name": "Earth (C-137)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/11.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "12",
+              "name": "A Rickle in Time"
+            }
+          ],
+          "created": "2017-11-04T20:20:20.965Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "12",
+          "name": "Alexander",
+          "status": "Dead",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "1",
+            "name": "Earth (C-137)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "5",
+            "name": "Anatomy Park"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/12.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "3",
+              "name": "Anatomy Park"
+            }
+          ],
+          "created": "2017-11-04T20:32:33.144Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "13",
+          "name": "Alien Googah",
+          "status": "unknown",
+          "species": "Alien",
+          "type": "",
+          "gender": "unknown",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/13.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "31",
+              "name": "The Rickchurian Mortydate"
+            }
+          ],
+          "created": "2017-11-04T20:33:30.779Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "14",
+          "name": "Alien Morty",
+          "status": "unknown",
+          "species": "Alien",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/14.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            }
+          ],
+          "created": "2017-11-04T20:51:31.373Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "15",
+          "name": "Alien Rick",
+          "status": "unknown",
+          "species": "Alien",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/15.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            }
+          ],
+          "created": "2017-11-04T20:56:13.215Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "16",
+          "name": "Amish Cyborg",
+          "status": "Dead",
+          "species": "Alien",
+          "type": "Parasite",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/16.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "15",
+              "name": "Total Rickall"
+            }
+          ],
+          "created": "2017-11-04T21:12:45.235Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "17",
+          "name": "Annie",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Female",
+          "origin": {
+            "__typename": "Location",
+            "id": "1",
+            "name": "Earth (C-137)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "5",
+            "name": "Anatomy Park"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/17.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "3",
+              "name": "Anatomy Park"
+            }
+          ],
+          "created": "2017-11-04T22:21:24.481Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "18",
+          "name": "Antenna Morty",
+          "status": "Alive",
+          "species": "Human",
+          "type": "Human with antennae",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/18.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            },
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-11-04T22:25:29.008Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "19",
+          "name": "Antenna Rick",
+          "status": "unknown",
+          "species": "Human",
+          "type": "Human with antennae",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            }
+          ],
+          "created": "2017-11-04T22:28:13.756Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "20",
+          "name": "Ants in my Eyes Johnson",
+          "status": "unknown",
+          "species": "Human",
+          "type": "Human with ants in his eyes",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "6",
+            "name": "Interdimensional Cable"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/20.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "8",
+              "name": "Rixty Minutes"
+            }
+          ],
+          "created": "2017-11-04T22:34:53.659Z"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/videoplayer_nav_graph"
+    app:startDestination="@id/videoPlayerFragment">
+
+    <fragment
+        android:id="@+id/videoPlayerFragment"
+        android:label="fragment_video_player"
+        android:name="com.dawidk.videoplayer.VideoPlayerFragment"
+        tools:layout="@layout/fragment_video_player">
+        <deepLink app:uri="https://www.rickandmortyvod.dawidk.com/videoPlayer?id={id}&amp;videoType={videoType}" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="videoType"
+            app:argType="com.dawidk.common.video.VideoType" />
+    </fragment>
+</navigation>

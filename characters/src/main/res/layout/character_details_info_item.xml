@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="@color/card_background_color">
+
+    <ImageView
+        android:id="@+id/characterImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@integer/details_image_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/characterNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/card_name_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/characterImageView" />
+
+
+    <ImageView
+        android:id="@+id/statusCircleImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingEnd="@dimen/grid_4"
+        android:src="@drawable/status_circle_large"
+        app:layout_constraintBottom_toBottomOf="@+id/characterStatusTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/characterStatusTextView" />
+
+    <TextView
+        android:id="@+id/characterStatusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toEndOf="@id/statusCircleImageView"
+        app:layout_constraintTop_toBottomOf="@id/characterNameTextView" />
+
+
+    <TextView
+        android:id="@+id/speciesHeaderTextView"
+        android:layout_width="@dimen/header_width"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:text="@string/species_header"
+        android:textColor="@color/header_font_color"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characterStatusTextView" />
+
+    <TextView
+        android:id="@+id/speciesTextView"
+        android:layout_width="@dimen/card_text_view_width"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toEndOf="@+id/speciesHeaderTextView"
+        app:layout_constraintTop_toBottomOf="@+id/characterStatusTextView" />
+
+    <TextView
+        android:id="@+id/genderHeaderTextView"
+        android:layout_width="@dimen/header_width"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:text="@string/gender_header"
+        android:textColor="@color/header_font_color"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speciesTextView" />
+
+    <TextView
+        android:id="@+id/genderTextView"
+        android:layout_width="@dimen/card_text_view_width"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toEndOf="@+id/genderHeaderTextView"
+        app:layout_constraintTop_toBottomOf="@+id/speciesTextView" />
+
+
+    <TextView
+        android:id="@+id/createdHeaderTextView"
+        android:layout_width="@dimen/header_width"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:text="@string/created_header"
+        android:textColor="@color/header_font_color"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genderTextView" />
+
+    <TextView
+        android:id="@+id/createdTextView"
+        android:layout_width="@dimen/card_text_view_width"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toEndOf="@+id/createdHeaderTextView"
+        app:layout_constraintTop_toBottomOf="@+id/genderTextView" />
+
+    <TextView
+        android:id="@+id/firstSeenHeaderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:text="@string/first_seen_in"
+        android:textColor="@color/header_font_color"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createdTextView" />
+
+    <TextView
+        android:id="@+id/firstSeenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingBottom="@dimen/grid_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstSeenHeaderTextView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+query LocationsList($page:Int = 1, $filter: FilterLocation) {
+    locations(page: $page, filter: $filter) {
+        info {
+            ...InfoDetails
+        }
+        results{
+           ...LocationDetails
+        }
+    }
+}

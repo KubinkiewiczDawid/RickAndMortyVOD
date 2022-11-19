@@ -1,0 +1,779 @@
+{
+  "data": {
+    "characters": {
+      "__typename": "Characters",
+      "results": [
+        {
+          "__typename": "Character",
+          "id": "1",
+          "name": "Rick Sanchez",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "1",
+            "name": "Earth (C-137)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "1",
+              "name": "Pilot"
+            },
+            {
+              "__typename": "Episode",
+              "id": "2",
+              "name": "Lawnmower Dog"
+            },
+            {
+              "__typename": "Episode",
+              "id": "3",
+              "name": "Anatomy Park"
+            },
+            {
+              "__typename": "Episode",
+              "id": "4",
+              "name": "M. Night Shaym-Aliens!"
+            },
+            {
+              "__typename": "Episode",
+              "id": "5",
+              "name": "Meeseeks and Destroy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "6",
+              "name": "Rick Potion #9"
+            },
+            {
+              "__typename": "Episode",
+              "id": "7",
+              "name": "Raising Gazorpazorp"
+            },
+            {
+              "__typename": "Episode",
+              "id": "8",
+              "name": "Rixty Minutes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "9",
+              "name": "Something Ricked This Way Comes"
+            },
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            },
+            {
+              "__typename": "Episode",
+              "id": "11",
+              "name": "Ricksy Business"
+            },
+            {
+              "__typename": "Episode",
+              "id": "12",
+              "name": "A Rickle in Time"
+            },
+            {
+              "__typename": "Episode",
+              "id": "13",
+              "name": "Mortynight Run"
+            },
+            {
+              "__typename": "Episode",
+              "id": "14",
+              "name": "Auto Erotic Assimilation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "15",
+              "name": "Total Rickall"
+            },
+            {
+              "__typename": "Episode",
+              "id": "16",
+              "name": "Get Schwifty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "17",
+              "name": "The Ricks Must Be Crazy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "18",
+              "name": "Big Trouble in Little Sanchez"
+            },
+            {
+              "__typename": "Episode",
+              "id": "19",
+              "name": "Interdimensional Cable 2: Tempting Fate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "20",
+              "name": "Look Who's Purging Now"
+            },
+            {
+              "__typename": "Episode",
+              "id": "21",
+              "name": "The Wedding Squanchers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "22",
+              "name": "The Rickshank Rickdemption"
+            },
+            {
+              "__typename": "Episode",
+              "id": "23",
+              "name": "Rickmancing the Stone"
+            },
+            {
+              "__typename": "Episode",
+              "id": "24",
+              "name": "Pickle Rick"
+            },
+            {
+              "__typename": "Episode",
+              "id": "25",
+              "name": "Vindicators 3: The Return of Worldender"
+            },
+            {
+              "__typename": "Episode",
+              "id": "26",
+              "name": "The Whirly Dirly Conspiracy"
+            },
+            {
+              "__typename": "Episode",
+              "id": "27",
+              "name": "Rest and Ricklaxation"
+            },
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            },
+            {
+              "__typename": "Episode",
+              "id": "29",
+              "name": "Morty's Mind Blowers"
+            },
+            {
+              "__typename": "Episode",
+              "id": "30",
+              "name": "The ABC's of Beth"
+            },
+            {
+              "__typename": "Episode",
+              "id": "31",
+              "name": "The Rickchurian Mortydate"
+            },
+            {
+              "__typename": "Episode",
+              "id": "32",
+              "name": "Edge of Tomorty: Rick, Die, Rickpeat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "33",
+              "name": "The Old Man and the Seat"
+            },
+            {
+              "__typename": "Episode",
+              "id": "34",
+              "name": "One Crew Over the Crewcoo's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "35",
+              "name": "Claw and Hoarder: Special Ricktim's Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "36",
+              "name": "Rattlestar Ricklactica"
+            },
+            {
+              "__typename": "Episode",
+              "id": "37",
+              "name": "Never Ricking Morty"
+            },
+            {
+              "__typename": "Episode",
+              "id": "38",
+              "name": "Promortyus"
+            },
+            {
+              "__typename": "Episode",
+              "id": "39",
+              "name": "The Vat of Acid Episode"
+            },
+            {
+              "__typename": "Episode",
+              "id": "40",
+              "name": "Childrick of Mort"
+            },
+            {
+              "__typename": "Episode",
+              "id": "41",
+              "name": "Star Mort: Rickturn of the Jerri"
+            }
+          ],
+          "created": "2017-11-04T18:48:46.250Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "48",
+          "name": "Black Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/48.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "22",
+              "name": "The Rickshank Rickdemption"
+            },
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-11-05T11:15:26.044Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "72",
+          "name": "Cool Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "26",
+            "name": "Earth (K-83)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/72.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-11-30T11:41:11.542Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "74",
+          "name": "Cop Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/74.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-11-30T11:48:18.950Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "78",
+          "name": "Cowboy Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/78.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            },
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-11-30T14:15:18.347Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "220",
+          "name": "Mega Fruit Farmer Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/220.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-12-30T14:35:30.736Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "265",
+          "name": "Pickle Rick",
+          "status": "Alive",
+          "species": "unknown",
+          "type": "Pickle",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "1",
+            "name": "Earth (C-137)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/265.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "24",
+              "name": "Pickle Rick"
+            }
+          ],
+          "created": "2017-12-31T13:47:10.617Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "267",
+          "name": "Plumber Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/267.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-12-31T13:50:57.337Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "288",
+          "name": "Rick D716-B",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "60",
+            "name": "Earth (D716-B)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/288.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-12-31T19:55:25.101Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "289",
+          "name": "Rick D716-C",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "61",
+            "name": "Earth (D716-C)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/289.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-12-31T19:57:36.546Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "291",
+          "name": "Rick J-22",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "62",
+            "name": "Earth (J-22)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/291.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-12-31T20:16:52.337Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "292",
+          "name": "Rick K-22",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "52",
+            "name": "Earth (K-22)"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "20",
+            "name": "Earth (Replacement Dimension)"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/292.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2017-12-31T20:20:40.484Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "328",
+          "name": "Slow Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/328.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2018-01-10T16:14:16.331Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "345",
+          "name": "Teacher Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/345.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2018-01-10T17:33:23.437Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "381",
+          "name": "Woman Rick",
+          "status": "Alive",
+          "species": "Alien",
+          "type": "Chair",
+          "gender": "Female",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/381.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "10",
+              "name": "Close Rick-counters of the Rick Kind"
+            }
+          ],
+          "created": "2018-01-10T19:46:00.622Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "472",
+          "name": "Baby Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "Clone",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/472.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2018-05-22T17:11:53.084Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "477",
+          "name": "Hairdresser Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/477.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2018-05-22T17:19:36.127Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "478",
+          "name": "Journalist Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/478.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2018-05-22T17:22:18.417Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "482",
+          "name": "Secret Service Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/482.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2018-05-22T17:32:32.561Z"
+        },
+        {
+          "__typename": "Character",
+          "id": "483",
+          "name": "Steve Jobs Rick",
+          "status": "Alive",
+          "species": "Human",
+          "type": "",
+          "gender": "Male",
+          "origin": {
+            "__typename": "Location",
+            "id": null,
+            "name": "unknown"
+          },
+          "location": {
+            "__typename": "Location",
+            "id": "3",
+            "name": "Citadel of Ricks"
+          },
+          "image": "https://rickandmortyapi.com/api/character/avatar/483.jpeg",
+          "episode": [
+            {
+              "__typename": "Episode",
+              "id": "28",
+              "name": "The Ricklantis Mixup"
+            }
+          ],
+          "created": "2018-05-22T17:33:33.815Z"
+        }
+      ]
+    }
+  }
+}

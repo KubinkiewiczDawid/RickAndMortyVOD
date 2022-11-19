@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.iml" filepath="$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RickAndMortyVOD.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.buildSrc.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/RickAndMortyVOD.buildSrc.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.iml" filepath="$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.main.iml" filepath="$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/characters/RickAndMortyVOD.characters.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/common/RickAndMortyVOD.common.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/core/RickAndMortyVOD.core.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.iml" filepath="$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.main.iml" filepath="$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/episodes/RickAndMortyVOD.episodes.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.iml" filepath="$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.main.iml" filepath="$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/home/RickAndMortyVOD.home.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.iml" filepath="$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.main.iml" filepath="$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/location/RickAndMortyVOD.location.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.iml" filepath="$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.main.iml" filepath="$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/registration/RickAndMortyVOD.registration.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.iml" filepath="$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.main.iml" filepath="$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/search/RickAndMortyVOD.search.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.iml" filepath="$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.main.iml" filepath="$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/settings/RickAndMortyVOD.settings.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.iml" filepath="$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/videoplayer/RickAndMortyVOD.videoplayer.unitTest.iml" />
+    </modules>
+  </component>
+</project>

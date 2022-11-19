@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/video_player_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VideoPlayerFragment">
+
+    <ProgressBar
+        android:id="@+id/videoPlayerProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/video_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/grid_58"
+        app:layout_constraintHeight_percent="@integer/video_player_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/videoNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/list_item_name_font_size_large"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/video_player_view" />
+
+    <TextView
+        android:id="@+id/videoDetailsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@integer/video_player_text_opacity"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_10"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoNameTextView" />
+
+    <TextView
+        android:id="@+id/videoDetailsSeparator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@integer/video_player_text_opacity"
+        android:paddingStart="@dimen/grid_8"
+        android:paddingTop="@dimen/grid_10"
+        android:text="@string/text_separator"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/videoDetailsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/videoNameTextView" />
+
+    <TextView
+        android:id="@+id/videoMoreDetailsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@integer/video_player_text_opacity"
+        android:paddingStart="@dimen/grid_8"
+        android:paddingTop="@dimen/grid_10"
+        android:textColor="@color/white"
+        android:textSize="@dimen/details_screen_font_size"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/videoDetailsSeparator"
+        app:layout_constraintTop_toBottomOf="@+id/videoNameTextView" />
+
+    <TextView
+        android:id="@+id/videoDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="@integer/video_player_text_opacity"
+        android:paddingStart="@dimen/grid_15"
+        android:paddingTop="@dimen/grid_15"
+        android:paddingEnd="@dimen/grid_15"
+        android:text="@string/lorem_ipsum"
+        android:textColor="@color/white"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoMoreDetailsTextView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

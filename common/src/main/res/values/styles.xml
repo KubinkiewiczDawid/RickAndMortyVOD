@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.RickAdnMortyVOD.Navbar.Custom" parent="Widget.Design.AppBarLayout">
+        <item name="elevation">0dp</item>
+        <item name="layout_insetEdge">none</item>
+        <item name="android:background">#3C3E43</item>
+    </style>
+
+    <style name="Widget.RickAdnMortyVOD.PrimaryButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="android:textColor">@color/header_font_color</item>
+        <item name="android:paddingLeft">@dimen/mtrl_btn_text_btn_padding_left</item>
+        <item name="android:paddingRight">@dimen/mtrl_btn_text_btn_padding_right</item>
+        <item name="iconTint">@color/header_font_color</item>
+        <item name="iconPadding">@dimen/mtrl_btn_text_btn_icon_padding</item>
+        <item name="backgroundTint">@color/geebung</item>
+        <item name="rippleColor">@color/white</item>
+    </style>
+
+    <style name="CustomMediaRouterTheme" parent="Theme.MediaRouter">
+        <item name="mediaRouteButtonStyle">@style/CustomMediaRouteButtonStyle</item>
+    </style>
+
+    <style name="CustomMediaRouteButtonStyle" parent="Widget.MediaRouter.Light.MediaRouteButton">
+        <item name="mediaRouteButtonTint">@color/header_font_color</item>
+    </style>
+
+    <style name="Theme.CastVideosDark" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimaryDark">@color/black</item>
+    </style>
+
+    <style name="ListItemsCardStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/card_height</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">@dimen/card_margin</item>
+        <item name="android:backgroundTint">@color/card_background_color</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="ListTilesCardStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">@dimen/tile_width</item>
+        <item name="android:layout_height">@dimen/tile_height</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">@dimen/card_margin</item>
+        <item name="android:backgroundTint">@color/card_background_color</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+</resources>

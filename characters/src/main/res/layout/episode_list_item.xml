@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tab_item_height"
+    android:layout_gravity="center"
+    android:backgroundTint="@color/card_background_darker_color"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="0dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/episodeImageView"
+            android:layout_width="@dimen/episode_image_size"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/episodeName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/grid_8"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/grid_15"
+            android:textColor="@color/white"
+            android:textSize="@dimen/episode_name_font_size"
+            app:layout_constraintBottom_toTopOf="@id/episodeHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/episodeImageView"
+            app:layout_constraintTop_toTopOf="@+id/episodeImageView"
+            tools:text="Close Rick-counters of the Rick kind" />
+
+        <TextView
+            android:id="@+id/episodeHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/grid_15"
+            android:text="@string/episode"
+            android:textColor="@color/header_font_color"
+            app:layout_constraintBottom_toTopOf="@id/airDateHeader"
+            app:layout_constraintStart_toEndOf="@+id/episodeImageView"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/episodeText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/grid_8"
+            android:paddingStart="@dimen/grid_15"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/episodeHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/episodeHeader"
+            app:layout_constraintTop_toTopOf="@+id/episodeHeader"
+            tools:text="S01E10" />
+
+        <TextView
+            android:id="@+id/airDateHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/grid_2"
+            android:paddingStart="@dimen/grid_15"
+            android:text="@string/air_date"
+            android:textColor="@color/header_font_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/episodeImageView" />
+
+        <TextView
+            android:id="@+id/airDate"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/grid_8"
+            android:paddingStart="@dimen/grid_15"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/airDateHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/airDateHeader"
+            app:layout_constraintTop_toTopOf="@+id/airDateHeader"
+            tools:text="April 7, 2014" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

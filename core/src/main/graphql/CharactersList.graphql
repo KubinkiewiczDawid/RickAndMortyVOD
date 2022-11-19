@@ -1,0 +1,10 @@
+query CharactersList($page:Int = 1, $filter: FilterCharacter) {
+    characters(page: $page, filter: $filter) {
+        info {
+            ...InfoDetails
+        }
+        results {
+            ...CharacterDetails
+        }
+    }
+}

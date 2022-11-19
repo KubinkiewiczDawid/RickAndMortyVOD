@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "500215855897",
+    "project_id": "rickandmortyvod",
+    "storage_bucket": "rickandmortyvod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500215855897:android:2b56d5fec8c408e942e388",
+        "android_client_info": {
+          "package_name": "com.dawidk.rickandmortyvod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500215855897-ovr7tj6bv34ss6itetshib70057ns8gn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dawidk.rickandmortyvod",
+            "certificate_hash": "5f77502ca33b558333784b50f8faaaaf1a42292c"
+          }
+        },
+        {
+          "client_id": "500215855897-meoclc2jr3ohrdn5t5ds8bl3faoq5tlm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCrvf6suBtX_tvVc1BneTHvNlmzff46oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500215855897-meoclc2jr3ohrdn5t5ds8bl3faoq5tlm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
