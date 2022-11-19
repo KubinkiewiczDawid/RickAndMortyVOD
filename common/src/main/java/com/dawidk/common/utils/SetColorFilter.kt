@@ -1,4 +1,4 @@
-package com.dawidk.shared.utils
+package com.dawidk.common.utils
 
 import android.graphics.BlendMode.SRC_ATOP
 import android.graphics.BlendModeColorFilter

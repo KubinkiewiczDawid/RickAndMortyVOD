@@ -1,11 +1,7 @@
 package com.dawidk.videoplayer
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerView
 import com.dawidk.common.video.MediaItem
@@ -37,7 +33,7 @@ class VideoPlayerViewModel(
     private val videoStateDataStoreRepository: VideoStateDataStoreRepository,
     private val castVideoService: CastVideoService,
     private val fetchRandomAdTagUseCase: FetchRandomAdTagUseCase
-) : AndroidViewModel(application), LifecycleObserver {
+) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     private val _state: MutableStateFlow<VideoPlayerState> =
         MutableStateFlow(VideoPlayerState.Loading)
@@ -53,8 +49,7 @@ class VideoPlayerViewModel(
         registerCastVideoServiceEventListener()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun onPause() {
+    override fun onPause(owner: LifecycleOwner) {
         castVideoService.releaseIfNotActive()
         releasePlayer()
     }

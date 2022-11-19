@@ -3,8 +3,7 @@ package com.dawidk.common.episodeProgressBar
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
 import com.dawidk.core.datastore.VideoStateDataStoreRepository
-import com.dawidk.shared.utils.setColorFilter
-import kotlinx.coroutines.flow.collect
+import com.dawidk.common.utils.setColorFilter
 
 class EpisodeProgressBarHandler(
     private val videoStateDataStoreRepository: VideoStateDataStoreRepository,

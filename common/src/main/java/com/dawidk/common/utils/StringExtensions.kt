@@ -1,3 +1,3 @@
-package com.dawidk.characters.utils
+package com.dawidk.common.utils
 
 fun String.capitalizeString() = this.replaceFirstChar { it.uppercase() }

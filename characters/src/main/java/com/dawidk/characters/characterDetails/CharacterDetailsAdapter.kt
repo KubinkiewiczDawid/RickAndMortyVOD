@@ -19,7 +19,7 @@ import com.dawidk.characters.databinding.EpisodeListItemBinding
 import com.dawidk.characters.databinding.LocationListItemBinding
 import com.dawidk.characters.model.*
 import com.dawidk.characters.model.CharacterItem.*
-import com.dawidk.characters.utils.capitalizeString
+import com.dawidk.common.utils.capitalizeString
 import com.dawidk.common.constants.EPISODE_IMAGE_SMALL
 import com.dawidk.common.utils.*
 import com.dawidk.core.domain.model.CharacterStatus

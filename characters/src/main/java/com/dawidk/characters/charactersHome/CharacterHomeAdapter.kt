@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.dawidk.characters.charactersHome.CharacterHomeAdapter.CharacterHomeViewHolder
 import com.dawidk.characters.databinding.CharacterHomeItemBinding
-import com.dawidk.characters.utils.capitalizeString
+import com.dawidk.common.utils.capitalizeString
 import com.dawidk.common.constants.CHARACTER_IMAGE_MEDIUM
 import com.dawidk.common.utils.fetchBitmapImage
 import com.dawidk.core.domain.model.Character
