@@ -46,7 +46,7 @@ class HomeNavigator(
     }
 
     private fun goToEpisodeDetailsScreen(screen: Screen.EpisodeDetails) {
-        _navController.navigate(Uri.parse("https://www.rickandmortyvod.dawidk.com/episodeDetails/${screen.id}"))
+        _navController.navigate(NavigationDirections.actionFragmentContainerToEpisodeDetailsFragment(screen.id))
     }
 
     private fun goToVideoPlayerScreen(screen: Screen.VideoPlayer) {

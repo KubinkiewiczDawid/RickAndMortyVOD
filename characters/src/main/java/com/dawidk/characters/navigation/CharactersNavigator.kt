@@ -2,7 +2,9 @@ package com.dawidk.characters.navigation
 
 import android.content.Context
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.dawidk.characters.R
+import com.dawidk.characters.characterDetails.CharacterDetailsFragmentDirections
 import com.dawidk.common.NavigationDirections
 import com.dawidk.common.navigation.Navigator
 import com.dawidk.common.navigation.NavigatorScreen

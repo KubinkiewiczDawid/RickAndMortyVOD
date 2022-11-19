@@ -11,10 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dawidk.characters.R
+import com.dawidk.characters.characterDetails.navigation.CharacterDetailsNavigator
+import com.dawidk.characters.characterDetails.navigation.Screen
 import com.dawidk.characters.characterDetails.state.CharacterDetailsAction
 import com.dawidk.characters.characterDetails.state.CharacterDetailsEvent
 import com.dawidk.characters.databinding.CharacterDetailsFragmentBinding
 import com.dawidk.characters.model.CharacterItem
+import com.dawidk.characters.navigation.CharactersNavigator
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
 import com.dawidk.common.utils.NetworkMonitor
@@ -33,6 +36,7 @@ class CharacterDetailsFragment : Fragment(R.layout.character_details_fragment),
     private val networkMonitor: NetworkMonitor by inject()
     private var characterDetailsAdapter: CharacterDetailsAdapter? = null
     private var characterItemsList: List<CharacterItem> = emptyList()
+    private val characterDetailsNavigator: CharacterDetailsNavigator by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,6 +45,8 @@ class CharacterDetailsFragment : Fragment(R.layout.character_details_fragment),
         characterId = safeArgs.id
 
         characterDetailsAdapter = CharacterDetailsAdapter()
+
+        characterDetailsNavigator.navController = findNavController()
 
         binding.detailsRv.apply {
             adapter = characterDetailsAdapter
@@ -103,11 +109,7 @@ class CharacterDetailsFragment : Fragment(R.layout.character_details_fragment),
     }
 
     private fun navigateToEpisodeDetails(id: String) {
-        findNavController().navigate(
-            CharacterDetailsFragmentDirections.actionFragmentContainerToEpisodeDetailsFragment(
-                id
-            )
-        )
+        characterDetailsNavigator.navigateTo(Screen.EpisodeDetails(id))
     }
 
     override fun onDestroyView() {
