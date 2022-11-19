@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/background_darker_color"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/screen_bottom_padding"
     tools:context="com.dawidk.episodes.episodeDetails.EpisodeDetailsFragment">
 
     <ProgressBar

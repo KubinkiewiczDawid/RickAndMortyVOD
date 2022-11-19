@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph" />
+        app:navGraph="@navigation/nav_graph"
+        tools:layout="@layout/home_fragment"
+        android:paddingBottom="@dimen/screen_bottom_padding"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/topAppBar"

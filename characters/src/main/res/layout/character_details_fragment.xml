@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_darker_color"
-    android:paddingBottom="@dimen/screen_bottom_padding"
     tools:context="com.dawidk.characters.characterDetails.CharacterDetailsFragment">
 
     <ProgressBar
