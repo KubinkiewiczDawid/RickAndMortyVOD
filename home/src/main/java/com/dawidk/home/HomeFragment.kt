@@ -3,7 +3,6 @@ package com.dawidk.home
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -11,29 +10,29 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
+import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
-import com.dawidk.core.utils.DataLoadingException
 import com.dawidk.home.databinding.HomeFragmentBinding
 import com.dawidk.home.model.CarouselItem
 import com.dawidk.home.model.Playlist
 import com.dawidk.home.model.PlaylistItem
 import com.dawidk.home.navigation.HomeNavigator
 import com.dawidk.home.navigation.Screen
-import com.dawidk.home.state.HomeAction
-import com.dawidk.home.state.HomeEvent
-import com.dawidk.home.state.HomeState
+import com.dawidk.home.mvi.HomeAction
+import com.dawidk.home.mvi.HomeEvent
+import com.dawidk.home.mvi.HomeState
 import com.dawidk.videoplayer.cast.service.CastVideoService
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment(R.layout.home_fragment), ErrorDialogFragment.Callback {
+class HomeFragment :
+    BaseFragment<HomeEvent, HomeAction, HomeState, HomeViewModel, HomeFragmentBinding>(R.layout.home_fragment) {
 
-    private val viewModel by viewModel<HomeViewModel>()
-    private val binding by viewBinding(HomeFragmentBinding::bind)
+    override val viewModel by viewModel<HomeViewModel>()
+    override val binding by viewBinding(HomeFragmentBinding::bind)
+    override val networkMonitor: NetworkMonitor by inject()
     private val homeNavigator: HomeNavigator by inject()
-    private val networkMonitor: NetworkMonitor by inject()
     private var homeScreenAdapter: HomeScreenAdapter? = null
     private val castVideoService: CastVideoService by inject()
 
@@ -49,13 +48,37 @@ class HomeFragment : Fragment(R.layout.home_fragment), ErrorDialogFragment.Callb
 
         homeScreenAdapter = HomeScreenAdapter()
 
-        checkInternetConnection()
         setUpRecyclerView()
         registerCarouselClickEvent()
         registerPlaylistClickEventListener()
         registerSeeAllClickEventListener()
-        registerEventListener()
-        registerStateListener()
+    }
+
+    override fun handleEvent(event: HomeEvent) {
+        when (event) {
+            is HomeEvent.NavigateToSeeAllScreen -> navigateToSeeAllFragment(
+                event.playlist
+            )
+            is HomeEvent.NavigateToCharacterDetailsScreen -> navigateToCharacterDetails(
+                event.id
+            )
+            is HomeEvent.NavigateToEpisodeDetailsScreen -> navigateToEpisodeDetails(
+                event.id
+            )
+            is HomeEvent.NavigateToVideoPlayerScreen -> navigateToVideoPlayerScreen(event.episodeId)
+        }
+    }
+
+    override fun handleState(state: HomeState) {
+        when (state) {
+            is HomeState.DataLoaded -> updateUI(state)
+            is HomeState.Error -> showError(state)
+            is HomeState.Loading -> showLoading()
+        }
+    }
+
+    override fun onDataLoadingException() {
+        viewModel.onAction(HomeAction.LoadHomeItems)
     }
 
     override fun onDestroyView() {
@@ -142,41 +165,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), ErrorDialogFragment.Callb
         }
     }
 
-    private fun registerEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.event.collect {
-                    when (it) {
-                        is HomeEvent.NavigateToSeeAllScreen -> navigateToSeeAllFragment(
-                            it.playlist
-                        )
-                        is HomeEvent.NavigateToCharacterDetailsScreen -> navigateToCharacterDetails(
-                            it.id
-                        )
-                        is HomeEvent.NavigateToEpisodeDetailsScreen -> navigateToEpisodeDetails(
-                            it.id
-                        )
-                        is HomeEvent.NavigateToVideoPlayerScreen -> navigateToVideoPlayerScreen(it.episodeId)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun registerStateListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect {
-                    when (it) {
-                        is HomeState.DataLoaded -> updateUI(it)
-                        is HomeState.Error -> showError(it)
-                        is HomeState.Loading -> showLoading()
-                    }
-                }
-            }
-        }
-    }
-
     private fun navigateToSeeAllFragment(playlist: Playlist) {
         homeNavigator.navigateTo(Screen.SeeAll(playlist))
     }
@@ -211,34 +199,5 @@ class HomeFragment : Fragment(R.layout.home_fragment), ErrorDialogFragment.Callb
     private fun showError(state: HomeState.Error) {
         hideLoading()
         ErrorDialogFragment.show(childFragmentManager, state.exception)
-    }
-
-    override fun onPositiveButtonClicked(error: Throwable) {
-        if (error is DataLoadingException) {
-            viewModel.onAction(HomeAction.LoadHomeItems)
-        } else {
-            checkInternetConnection()
-        }
-    }
-
-    override fun onNegativeButtonClicked() {
-        requireActivity().finish()
-    }
-
-    private fun checkInternetConnection() {
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                networkMonitor.state.collect {
-                    when (it) {
-                        false -> {
-                            ErrorDialogFragment.show(
-                                childFragmentManager,
-                                Throwable(getString(R.string.no_internet_error_message))
-                            )
-                        }
-                    }
-                }
-            }
-        }
     }
 }

@@ -1,6 +1,8 @@
 package com.dawidk.location.state
 
-sealed class LocationsAction {
+import com.dawidk.common.mvi.ViewAction
+
+sealed class LocationsAction: ViewAction {
     object Init : LocationsAction()
     object Load : LocationsAction()
     object DataLoaded : LocationsAction()

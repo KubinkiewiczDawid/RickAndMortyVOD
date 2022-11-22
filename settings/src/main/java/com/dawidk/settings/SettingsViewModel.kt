@@ -1,33 +1,26 @@
 package com.dawidk.settings
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dawidk.common.mvi.BaseViewModel
 import com.dawidk.core.datastore.UserCredentialsDataStoreRepository
 import com.dawidk.core.domain.mappers.mapToAccountInfo
-import com.dawidk.settings.state.SettingsAction
-import com.dawidk.settings.state.SettingsEvent
-import com.dawidk.settings.state.SettingsState
-import kotlinx.coroutines.flow.*
+import com.dawidk.settings.mvi.SettingsAction
+import com.dawidk.settings.mvi.SettingsEvent
+import com.dawidk.settings.mvi.SettingsState
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(
     private val userCredentialsDataStoreRepository: UserCredentialsDataStoreRepository
-) : ViewModel() {
+) : BaseViewModel<SettingsEvent, SettingsAction, SettingsState>(SettingsState.Loading) {
 
-    private val _state: MutableStateFlow<SettingsState> =
-        MutableStateFlow(SettingsState.Loading)
-    val state: StateFlow<SettingsState> = _state
-    private val _event: MutableSharedFlow<SettingsEvent> =
-        MutableSharedFlow(extraBufferCapacity = 1)
-    val event: SharedFlow<SettingsEvent> = _event
-
-    fun onAction(action: SettingsAction) {
+    override fun onAction(action: SettingsAction) {
         when (action) {
             SettingsAction.Init -> loadUserData()
-            SettingsAction.Load -> _state.value = SettingsState.Loading
+            SettingsAction.Load -> updateState(SettingsState.Loading)
             is SettingsAction.DataLoaded -> {
-                if (_state.value is SettingsState.Loading) {
-                    _state.value = SettingsState.DataLoaded(action.data)
+                if (state.value is SettingsState.Loading) {
+                    updateState(SettingsState.DataLoaded(action.data))
                 }
             }
             is SettingsAction.NavigateToSignInScreen -> viewModelScope.launch { navigateToSignInFragment() }
@@ -36,8 +29,8 @@ class SettingsViewModel(
 
     private fun loadUserData() {
         viewModelScope.launch {
-            userCredentialsDataStoreRepository.userCredentialsFlow.collect {
-                _state.value = SettingsState.DataLoaded(it.mapToAccountInfo())
+            userCredentialsDataStoreRepository.userCredentialsFlow.collectLatest {
+                updateState(SettingsState.DataLoaded(it.mapToAccountInfo()))
             }
         }
     }
@@ -52,6 +45,6 @@ class SettingsViewModel(
         viewModelScope.launch {
             clearUserData()
         }.join()
-        _event.tryEmit(SettingsEvent.NavigateToSignInScreen)
+        emitEvent(SettingsEvent.NavigateToSignInScreen)
     }
 }

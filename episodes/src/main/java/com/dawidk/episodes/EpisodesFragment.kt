@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
@@ -15,10 +14,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
+import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
 import com.dawidk.common.utils.selectLayoutManager
 import com.dawidk.core.domain.model.EpisodeFilter
-import com.dawidk.core.utils.DataLoadingException
 import com.dawidk.episodes.databinding.EpisodesFragmentBinding
 import com.dawidk.episodes.navigation.EpisodesNavigator
 import com.dawidk.episodes.navigation.Screen
@@ -26,22 +25,24 @@ import com.dawidk.episodes.seasonpicker.SEASONS_LIST
 import com.dawidk.episodes.seasonpicker.SELECTED_SEASON
 import com.dawidk.episodes.seasonpicker.SeasonPickerFragment
 import com.dawidk.episodes.seasonpicker.UPDATE_FUNCTION
-import com.dawidk.episodes.state.EpisodeAction
-import com.dawidk.episodes.state.EpisodeEvent
-import com.dawidk.episodes.state.EpisodeState
+import com.dawidk.episodes.mvi.EpisodeAction
+import com.dawidk.episodes.mvi.EpisodeEvent
+import com.dawidk.episodes.mvi.EpisodeState
 import com.dawidk.episodes.utils.mapToPrettySeasonName
 import com.dawidk.videoplayer.cast.service.CastVideoService
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.Serializable
 
-class EpisodesFragment : Fragment(R.layout.episodes_fragment), ErrorDialogFragment.Callback {
+class EpisodesFragment :
+    BaseFragment<EpisodeEvent, EpisodeAction, EpisodeState, EpisodesViewModel, EpisodesFragmentBinding>(
+        R.layout.episodes_fragment
+    ) {
 
-    private val viewModel by viewModel<EpisodesViewModel>()
-    private val binding by viewBinding(EpisodesFragmentBinding::bind)
-    private val networkMonitor: NetworkMonitor by inject()
+    override val viewModel by viewModel<EpisodesViewModel>()
+    override val binding by viewBinding(EpisodesFragmentBinding::bind)
+    override val networkMonitor: NetworkMonitor by inject()
     private val episodesNavigator: EpisodesNavigator by inject()
     private var episodesAdapter: EpisodesAdapter? = null
     private val castVideoService: CastVideoService by inject()
@@ -58,14 +59,37 @@ class EpisodesFragment : Fragment(R.layout.episodes_fragment), ErrorDialogFragme
         episodesAdapter = EpisodesAdapter()
         episodesNavigator.navController = findNavController()
 
-        checkInternetConnection()
-
         setUpRecyclerView()
         setUpSeasonPicker()
 
         registerClickEventListener()
-        registerEventListener()
-        registerStateListener()
+    }
+
+    override fun handleEvent(event: EpisodeEvent) {
+        when (event) {
+            is EpisodeEvent.NavigateToEpisodeDetails -> navigateToEpisodeDetails(
+                event.id
+            )
+            is EpisodeEvent.NavigateToSeasonsList -> navigateToSeasonsList(
+                event.selectedSeason,
+                event.seasonsList
+            )
+            is EpisodeEvent.NavigateToVideoPlayerScreen -> navigateToVideoPlayerScreen(
+                event.episodeId
+            )
+        }
+    }
+
+    override fun handleState(state: EpisodeState) {
+        when (state) {
+            is EpisodeState.Loading -> showLoading()
+            is EpisodeState.Error -> showError(state)
+            is EpisodeState.DataLoaded -> dataReceived(state)
+        }
+    }
+
+    override fun onDataLoadingException() {
+        viewModel.onAction(EpisodeAction.Init)
     }
 
     override fun onDestroyView() {
@@ -95,41 +119,6 @@ class EpisodesFragment : Fragment(R.layout.episodes_fragment), ErrorDialogFragme
                 episodesAdapter?.playButtonClickEvent?.collect {
                     if (it.id != castVideoService.castedVideoId) {
                         viewModel.onAction(EpisodeAction.NavigateToVideoPlayerScreen(it.id))
-                    }
-                }
-            }
-        }
-    }
-
-    private fun registerEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.event.collect {
-                    when (it) {
-                        is EpisodeEvent.NavigateToEpisodeDetails -> navigateToEpisodeDetails(
-                            it.id
-                        )
-                        is EpisodeEvent.NavigateToSeasonsList -> navigateToSeasonsList(
-                            it.selectedSeason,
-                            it.seasonsList
-                        )
-                        is EpisodeEvent.NavigateToVideoPlayerScreen -> navigateToVideoPlayerScreen(
-                            it.episodeId
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    private fun registerStateListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect {
-                    when (it) {
-                        is EpisodeState.Loading -> showLoading()
-                        is EpisodeState.Error -> showError(it)
-                        is EpisodeState.DataLoaded -> dataReceived(it)
                     }
                 }
             }
@@ -207,34 +196,5 @@ class EpisodesFragment : Fragment(R.layout.episodes_fragment), ErrorDialogFragme
     private fun showError(state: EpisodeState.Error) {
         hideLoading()
         ErrorDialogFragment.show(childFragmentManager, state.exception)
-    }
-
-    override fun onPositiveButtonClicked(error: Throwable) {
-        if (error is DataLoadingException) {
-            viewModel.onAction(EpisodeAction.Init)
-        } else {
-            checkInternetConnection()
-        }
-    }
-
-    override fun onNegativeButtonClicked() {
-        requireActivity().finish()
-    }
-
-    private fun checkInternetConnection() {
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                networkMonitor.state.collect {
-                    when (it) {
-                        false -> {
-                            ErrorDialogFragment.show(
-                                childFragmentManager,
-                                Throwable(getString(R.string.no_internet_error_message))
-                            )
-                        }
-                    }
-                }
-            }
-        }
     }
 }

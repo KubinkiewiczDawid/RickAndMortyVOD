@@ -1,7 +1,10 @@
 package com.dawidk.videoplayer
 
-import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.viewModelScope
+import com.dawidk.common.ApplicationProvider
+import com.dawidk.common.mvi.BaseViewModel
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerView
 import com.dawidk.common.video.MediaItem
@@ -15,36 +18,34 @@ import com.dawidk.videoplayer.cast.service.CastVideoService
 import com.dawidk.videoplayer.cast.service.state.CastVideoEvent
 import com.dawidk.videoplayer.cast.service.state.CastVideoState
 import com.dawidk.videoplayer.model.Video
+import com.dawidk.videoplayer.mvi.VideoPlayerAction
+import com.dawidk.videoplayer.mvi.VideoPlayerEvent
+import com.dawidk.videoplayer.mvi.VideoPlayerState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class VideoPlayerViewModel(
-    application: Application,
     private val fetchRandomVideoUseCase: FetchRandomVideoUseCase,
     private val fetchVideoFromUriUseCase: FetchVideoFromUriUseCase,
     private val fetchEpisodeByIdExecutor: FetchEpisodeByIdExecutor,
     private val videoPlayerApi: VideoPlayerApi<Player>,
     private val videoStateDataStoreRepository: VideoStateDataStoreRepository,
     private val castVideoService: CastVideoService,
-    private val fetchRandomAdTagUseCase: FetchRandomAdTagUseCase
-) : AndroidViewModel(application), DefaultLifecycleObserver {
+    private val fetchRandomAdTagUseCase: FetchRandomAdTagUseCase,
+    private val applicationProvider: ApplicationProvider
+) : BaseViewModel<VideoPlayerEvent, VideoPlayerAction, VideoPlayerState>(VideoPlayerState.Loading),
+    DefaultLifecycleObserver {
 
-    private val _state: MutableStateFlow<VideoPlayerState> =
-        MutableStateFlow(VideoPlayerState.Loading)
-    val state: StateFlow<VideoPlayerState> = _state
     private var mediaItem: MediaItem = MediaItem.EMPTY
     private var videoId: String = ""
     private var initializeJob: Job? = null
     private var releaseJob: Job? = null
 
     init {
-        castVideoService.init(getApplication())
+        castVideoService.init(applicationProvider.getApplication())
         registerCastVideoServiceStateListener()
         registerCastVideoServiceEventListener()
     }
@@ -54,7 +55,7 @@ class VideoPlayerViewModel(
         releasePlayer()
     }
 
-    fun onAction(action: VideoPlayerAction) {
+    override fun onAction(action: VideoPlayerAction) {
         when (action) {
             is VideoPlayerAction.FillVideoData ->
                 viewModelScope.launch { fillVideoData(action.id, action.videoType) }
@@ -91,17 +92,19 @@ class VideoPlayerViewModel(
     }
 
     private suspend fun fetchEpisodeById(id: String) {
-        _state.value = VideoPlayerState.Loading
+        updateState(VideoPlayerState.Loading)
         val episode = try {
             fetchEpisodeByIdExecutor.getEpisodeById(id)
         } catch (ex: DataLoadingException) {
             Episode.EMPTY
         }
-        _state.value = VideoPlayerState.FillVideoDataSuccess(
-            Video(
-                name = episode.name,
-                details = episode.episode,
-                moreDetails = episode.airDate
+        updateState(
+            VideoPlayerState.FillVideoDataSuccess(
+                Video(
+                    name = episode.name,
+                    details = episode.episode,
+                    moreDetails = episode.airDate
+                )
             )
         )
     }
@@ -110,8 +113,7 @@ class VideoPlayerViewModel(
         initializeJob = viewModelScope.launch(CoroutineExceptionHandler { _, exception ->
             when (exception) {
                 is DataLoadingException -> {
-                    _state.value =
-                        VideoPlayerState.Error(DataLoadingException("Cannot fetch episode details"))
+                    updateState(VideoPlayerState.Error(DataLoadingException("Cannot fetch episode details")))
                     pauseVideoPlayer()
                 }
             }
@@ -123,13 +125,13 @@ class VideoPlayerViewModel(
                 val videoProgress = (it?.videoProgress ?: 0L)
                 videoPlayerApi.initializePlayer(
                     playerView,
-                    getApplication(),
+                    applicationProvider.getApplication(),
                     mediaItem.url ?: "",
                     fetchRandomAdTagUseCase(),
                     true,
                     videoProgress
                 ).collect { player ->
-                    _state.value = VideoPlayerState.PlayerSet(player)
+                    updateState(VideoPlayerState.PlayerSet(player))
                 }
             }
         }
@@ -145,6 +147,7 @@ class VideoPlayerViewModel(
                     is CastVideoState.ApplicationDisconnected -> {
                         initializePlayer()
                     }
+                    CastVideoState.Idle -> {}
                 }
             }
         }
@@ -155,7 +158,7 @@ class VideoPlayerViewModel(
             castVideoService.event.collect {
                 when (it) {
                     is CastVideoEvent.OpenExpandedControls -> {
-                        _state.value = VideoPlayerState.OpenExpandedCastControls
+                        updateState(VideoPlayerState.OpenExpandedCastControls)
                     }
                 }
             }
@@ -203,7 +206,7 @@ class VideoPlayerViewModel(
             if (videoPlayerApi.player != null) {
                 saveVideoState(videoPlayerApi.getPlayerVideoProgress())
                 val player = videoPlayerApi.releasePlayer()
-                _state.value = VideoPlayerState.PlayerSet(player)
+                updateState(VideoPlayerState.PlayerSet(player))
             }
         }
     }

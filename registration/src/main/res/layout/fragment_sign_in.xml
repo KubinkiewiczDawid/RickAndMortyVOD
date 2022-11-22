@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/grid_24"
     tools:background="@color/background_color"
-    tools:context="com.dawidk.registration.SignInFragment">
+    tools:context="com.dawidk.registration.signin.SignInFragment">
 
     <TextView
         android:id="@+id/sing_in_text_view"

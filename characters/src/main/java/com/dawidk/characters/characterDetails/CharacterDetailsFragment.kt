@@ -13,34 +13,35 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dawidk.characters.R
 import com.dawidk.characters.characterDetails.navigation.CharacterDetailsNavigator
 import com.dawidk.characters.characterDetails.navigation.Screen
-import com.dawidk.characters.characterDetails.state.CharacterDetailsAction
-import com.dawidk.characters.characterDetails.state.CharacterDetailsEvent
+import com.dawidk.characters.characterDetails.mvi.CharacterDetailsAction
+import com.dawidk.characters.characterDetails.mvi.CharacterDetailsEvent
+import com.dawidk.characters.characterDetails.mvi.CharacterDetailsState
 import com.dawidk.characters.databinding.CharacterDetailsFragmentBinding
 import com.dawidk.characters.model.CharacterItem
-import com.dawidk.characters.navigation.CharactersNavigator
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
+import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
 import com.dawidk.core.utils.DataLoadingException
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterDetailsFragment : Fragment(R.layout.character_details_fragment),
-    ErrorDialogFragment.Callback {
+class CharacterDetailsFragment :
+    BaseFragment<CharacterDetailsEvent, CharacterDetailsAction, CharacterDetailsState, CharacterDetailsViewModel, CharacterDetailsFragmentBinding>(
+        R.layout.character_details_fragment
+    ) {
 
-    private val viewModel by viewModel<CharacterDetailsViewModel>()
-    private val binding by viewBinding(CharacterDetailsFragmentBinding::bind)
+    override val viewModel by viewModel<CharacterDetailsViewModel>()
+    override val binding by viewBinding(CharacterDetailsFragmentBinding::bind)
+    override val networkMonitor: NetworkMonitor by inject()
     private lateinit var characterId: String
-    private val networkMonitor: NetworkMonitor by inject()
     private var characterDetailsAdapter: CharacterDetailsAdapter? = null
     private var characterItemsList: List<CharacterItem> = emptyList()
     private val characterDetailsNavigator: CharacterDetailsNavigator by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkInternetConnection()
         val safeArgs: CharacterDetailsFragmentArgs by navArgs()
         characterId = safeArgs.id
 
@@ -55,8 +56,43 @@ class CharacterDetailsFragment : Fragment(R.layout.character_details_fragment),
 
         viewModel.onAction(CharacterDetailsAction.GetCharacterById(characterId))
 
-        registerStateListener()
+        registerClickEventListeners()
+    }
 
+    override fun handleEvent(event: CharacterDetailsEvent) {
+        when (event) {
+            is CharacterDetailsEvent.NavigateToEpisodeDetails -> {
+                navigateToEpisodeDetails(event.episodeId)
+            }
+        }
+    }
+
+    override fun handleState(state: CharacterDetailsState) {
+        when (state) {
+            is CharacterDetailsState.Loading -> showLoading()
+            is CharacterDetailsState.GetCharacterSuccess -> {
+                updateUI(state)
+            }
+            is CharacterDetailsState.GetEpisodes -> {
+                updateTab(state)
+            }
+            is CharacterDetailsState.GetLocations -> {
+                updateTab(state)
+            }
+            is CharacterDetailsState.Error -> showError(state)
+        }
+    }
+
+    override fun onDataLoadingException() {
+        viewModel.onAction(CharacterDetailsAction.GetCharacterById(characterId))
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        characterDetailsAdapter = null
+    }
+
+    private fun registerClickEventListeners() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 characterDetailsAdapter?.onEpisodeClickEvent?.collect {
@@ -94,50 +130,12 @@ class CharacterDetailsFragment : Fragment(R.layout.character_details_fragment),
                 }
             }
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.event.collect {
-                    when (it) {
-                        is CharacterDetailsEvent.NavigateToEpisodeDetails -> {
-                            navigateToEpisodeDetails(it.episodeId)
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private fun navigateToEpisodeDetails(id: String) {
         characterDetailsNavigator.navigateTo(Screen.EpisodeDetails(id))
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        characterDetailsAdapter = null
-    }
-
-    private fun registerStateListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect {
-                    when (it) {
-                        is CharacterDetailsState.Loading -> showLoading()
-                        is CharacterDetailsState.GetCharacterSuccess -> {
-                            updateUI(it)
-                        }
-                        is CharacterDetailsState.GetEpisodes -> {
-                            updateTab(it)
-                        }
-                        is CharacterDetailsState.GetLocations -> {
-                            updateTab(it)
-                        }
-                        is CharacterDetailsState.Error -> showError(it)
-                    }
-                }
-            }
-        }
-    }
 
     private fun updateUI(state: CharacterDetailsState.GetCharacterSuccess) {
         hideLoading()
@@ -173,41 +171,5 @@ class CharacterDetailsFragment : Fragment(R.layout.character_details_fragment),
     private fun showError(state: CharacterDetailsState.Error) {
         hideLoading()
         ErrorDialogFragment.show(childFragmentManager, state.exception)
-    }
-
-    override fun onPositiveButtonClicked(error: Throwable) {
-        if (error is DataLoadingException) {
-            viewModel.onAction(CharacterDetailsAction.GetCharacterById(characterId))
-        } else {
-            checkInternetConnection()
-        }
-    }
-
-    override fun onNegativeButtonClicked() {
-        requireActivity().finish()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        if (this::tabLayoutMediator.isInitialized) {
-//            tabLayoutMediator.detach()
-//        }
-    }
-
-    private fun checkInternetConnection() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                networkMonitor.state.collect {
-                    when (it) {
-                        false -> {
-                            ErrorDialogFragment.show(
-                                childFragmentManager,
-                                Throwable(getString(R.string.no_internet_error_message))
-                            )
-                        }
-                    }
-                }
-            }
-        }
     }
 }

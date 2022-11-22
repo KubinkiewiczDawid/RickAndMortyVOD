@@ -2,8 +2,8 @@ package com.dawidk.settings
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -12,30 +12,41 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
+import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.registration.AuthEvent
 import com.dawidk.common.registration.FirebaseAuthApi
 import com.dawidk.common.registration.GoogleClientApi
 import com.dawidk.common.registration.SignState
+import com.dawidk.common.utils.NetworkMonitor
 import com.dawidk.settings.databinding.SettingsFragmentBinding
 import com.dawidk.settings.navigation.Screen
 import com.dawidk.settings.navigation.SettingsNavigator
-import com.dawidk.settings.state.SettingsAction
-import com.dawidk.settings.state.SettingsEvent
-import com.dawidk.settings.state.SettingsState
-import kotlinx.coroutines.flow.collect
+import com.dawidk.settings.mvi.SettingsAction
+import com.dawidk.settings.mvi.SettingsEvent
+import com.dawidk.settings.mvi.SettingsState
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingsFragment : Fragment(R.layout.settings_fragment), ErrorDialogFragment.Callback {
+class SettingsFragment :
+    BaseFragment<SettingsEvent, SettingsAction, SettingsState, SettingsViewModel, SettingsFragmentBinding>(
+        R.layout.settings_fragment
+    ) {
 
-    private val viewModel by viewModel<SettingsViewModel>()
-    private val binding by viewBinding(SettingsFragmentBinding::bind)
+    override val viewModel by viewModel<SettingsViewModel>()
+    override val binding by viewBinding(SettingsFragmentBinding::bind)
+    override val networkMonitor: NetworkMonitor by inject()
     private val settingsNavigator: SettingsNavigator by inject()
     private val googleClientApi: GoogleClientApi by inject()
     private val firebaseAuthClient: FirebaseAuthApi by inject()
     private var settingsAdapter: SettingsAdapter? = null
     private lateinit var settingsListProvider: SettingsListProvider
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null)
+            viewModel.onAction(SettingsAction.Init)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,49 +65,37 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ErrorDialogFragme
             adapter = settingsAdapter
             layoutManager = LinearLayoutManager(activity)
             val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-            divider.setDrawable(requireContext().getDrawable(R.drawable.line_divider)!!)
+            AppCompatResources.getDrawable(requireContext(), R.drawable.line_divider)
+                ?.let { divider.setDrawable(it) }
             addItemDecoration(divider)
         }
 
-        registerEventListener()
-        registerStateListener()
         registerSettingsProviderListener()
         registerGoogleClientListener()
         registerFirebaseAuthListener()
+    }
 
-        if (savedInstanceState == null)
-            viewModel.onAction(SettingsAction.Init)
+    override fun handleEvent(event: SettingsEvent) {
+        when (event) {
+            is SettingsEvent.NavigateToSignInScreen -> navigateToSignInFragment()
+        }
+    }
+
+    override fun handleState(state: SettingsState) {
+        when (state) {
+            is SettingsState.DataLoaded -> updateUI(state)
+            is SettingsState.Error -> showError(state)
+            is SettingsState.Loading -> showLoading()
+        }
+    }
+
+    override fun onDataLoadingException() {
+        viewModel.onAction(SettingsAction.Init)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         settingsAdapter = null
-    }
-
-    private fun registerEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.event.collect {
-                    when (it) {
-                        is SettingsEvent.NavigateToSignInScreen -> navigateToSignInFragment()
-                    }
-                }
-            }
-        }
-    }
-
-    private fun registerStateListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect {
-                    when (it) {
-                        is SettingsState.DataLoaded -> updateUI(it)
-                        is SettingsState.Error -> showError(it)
-                        is SettingsState.Loading -> showLoading()
-                    }
-                }
-            }
-        }
     }
 
     private fun registerSettingsProviderListener() {
@@ -154,11 +153,5 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ErrorDialogFragme
     private fun showError(state: SettingsState.Error) {
         hideLoading()
         ErrorDialogFragment.show(childFragmentManager, state.exception)
-    }
-
-    override fun onPositiveButtonClicked(error: Throwable) {}
-
-    override fun onNegativeButtonClicked() {
-        requireActivity().finish()
     }
 }

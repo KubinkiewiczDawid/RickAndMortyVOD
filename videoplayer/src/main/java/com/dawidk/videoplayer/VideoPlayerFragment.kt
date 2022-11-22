@@ -8,28 +8,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
+import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
 import com.dawidk.common.video.VideoType
 import com.dawidk.core.utils.DataLoadingException
 import com.dawidk.videoplayer.cast.ExpandedControlsActivity
 import com.dawidk.videoplayer.databinding.FragmentVideoPlayerBinding
-import kotlinx.coroutines.flow.collect
+import com.dawidk.videoplayer.mvi.VideoPlayerAction
+import com.dawidk.videoplayer.mvi.VideoPlayerEvent
+import com.dawidk.videoplayer.mvi.VideoPlayerState
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class VideoPlayerFragment : Fragment(R.layout.fragment_video_player), ErrorDialogFragment.Callback {
+class VideoPlayerFragment :
+    BaseFragment<VideoPlayerEvent, VideoPlayerAction, VideoPlayerState, VideoPlayerViewModel, FragmentVideoPlayerBinding>(
+        R.layout.fragment_video_player
+    ) {
 
-    private val viewModel by viewModel<VideoPlayerViewModel>()
-    private val binding by viewBinding(FragmentVideoPlayerBinding::bind)
-    private val networkMonitor: NetworkMonitor by inject()
+    override val viewModel by viewModel<VideoPlayerViewModel>()
+    override val binding by viewBinding(FragmentVideoPlayerBinding::bind)
+    override val networkMonitor: NetworkMonitor by inject()
     private lateinit var videoId: String
     private lateinit var videoType: VideoType
 
@@ -44,8 +49,27 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player), ErrorDialo
         videoId = args.id
         videoType = args.videoType
 
-        registerStateListener()
         lifecycleScope.launch { checkInternetConnection() }
+    }
+
+    override fun handleEvent(event: VideoPlayerEvent) {}
+
+    override fun handleState(state: VideoPlayerState) {
+        when (state) {
+            is VideoPlayerState.Loading -> showLoading()
+            is VideoPlayerState.PlayerSet -> {
+                binding.videoPlayerView.player = state.player
+            }
+            is VideoPlayerState.FillVideoDataSuccess -> updateUI(state)
+            is VideoPlayerState.Error -> showError(state)
+            is VideoPlayerState.OpenExpandedCastControls -> {
+                openExpandedCastControls()
+            }
+        }
+    }
+
+    override fun onDataLoadingException() {
+        viewModel.onAction(VideoPlayerAction.FillVideoData(videoId, videoType))
     }
 
     override fun onStart() {
@@ -72,7 +96,8 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player), ErrorDialo
         val minimumHeight =
             if (orientation == Configuration.ORIENTATION_PORTRAIT) 0 else ViewGroup.LayoutParams.MATCH_PARENT
         val isVideoDescriptionVisible = (orientation == Configuration.ORIENTATION_PORTRAIT)
-        val playerConstraintPercentageHeight = if (orientation == Configuration.ORIENTATION_PORTRAIT) 0.4f else 1.0f
+        val playerConstraintPercentageHeight =
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) 0.4f else 1.0f
         val videoPlayerLayout = binding.videoPlayerLayout
         val set = ConstraintSet()
         set.clone(videoPlayerLayout)
@@ -89,53 +114,12 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player), ErrorDialo
         viewModel.onAction(VideoPlayerAction.FillVideoData(videoId, videoType))
     }
 
-    private fun registerStateListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect {
-                    when (it) {
-                        is VideoPlayerState.Loading -> showLoading()
-                        is VideoPlayerState.PlayerSet -> {
-                            binding.videoPlayerView.player = it.player
-                        }
-                        is VideoPlayerState.FillVideoDataSuccess -> updateUI(it)
-                        is VideoPlayerState.Error -> showError(it)
-                        is VideoPlayerState.OpenExpandedCastControls -> {
-                            openExpandedCastControls()
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     private fun openExpandedCastControls() {
         hideLoading()
         findNavController().popBackStack()
         val intent =
             Intent(requireActivity(), ExpandedControlsActivity::class.java)
         startActivity(intent)
-    }
-
-    private suspend fun checkInternetConnection(): Boolean {
-        var isConnected = true
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                networkMonitor.state.collect {
-                    when (it) {
-                        true -> isConnected = true
-                        false -> {
-                            ErrorDialogFragment.show(
-                                childFragmentManager,
-                                Throwable(getString(R.string.no_internet_error_message))
-                            )
-                            isConnected = false
-                        }
-                    }
-                }
-            }
-        }.join()
-        return isConnected
     }
 
     private fun setScreenMode(screenOrientation: Int) {
@@ -167,6 +151,27 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player), ErrorDialo
         binding.videoPlayerProgressBar.isVisible = false
     }
 
+    private suspend fun checkInternetConnection(): Boolean {
+        var isConnected = true
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                networkMonitor.state.collect {
+                    when (it) {
+                        true -> isConnected = true
+                        false -> {
+                            ErrorDialogFragment.show(
+                                childFragmentManager,
+                                Throwable(getString(R.string.no_internet_error_message))
+                            )
+                            isConnected = false
+                        }
+                    }
+                }
+            }
+        }.join()
+        return isConnected
+    }
+
     override fun onPositiveButtonClicked(error: Throwable) {
         if (error is DataLoadingException) {
             viewModel.onAction(VideoPlayerAction.FillVideoData(videoId, videoType))
@@ -178,9 +183,5 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player), ErrorDialo
                 }
             }
         }
-    }
-
-    override fun onNegativeButtonClicked() {
-        requireActivity().finish()
     }
 }

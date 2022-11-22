@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/locationsFragment"
         android:label="fragment_locations"
-        android:name="com.dawidk.location.ui.LocationsFragment"
+        android:name="com.dawidk.location.LocationsFragment"
         tools:layout="@layout/fragment_locations">
         <deepLink app:uri="https://www.rickandmortyvod.dawidk.com/locations" />
     </fragment>

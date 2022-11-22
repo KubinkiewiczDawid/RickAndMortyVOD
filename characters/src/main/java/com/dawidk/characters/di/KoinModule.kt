@@ -4,7 +4,7 @@ import com.dawidk.characters.characterDetails.CharacterDetailsItemsProvider
 import com.dawidk.characters.characterDetails.CharacterDetailsViewModel
 import com.dawidk.characters.characterDetails.navigation.CharacterDetailsNavigator
 import com.dawidk.characters.charactersHome.CharacterHomeViewModel
-import com.dawidk.characters.navigation.CharactersNavigator
+import com.dawidk.characters.charactersHome.navigation.CharactersNavigator
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

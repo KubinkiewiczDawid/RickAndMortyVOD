@@ -9,13 +9,11 @@ import com.dawidk.common.di.sharedModule
 import com.dawidk.core.di.coreModule
 import com.dawidk.episodes.di.episodesModule
 import com.dawidk.home.di.homeModule
-import com.dawidk.location.locationModule
+import com.dawidk.location.di.locationModule
 import com.dawidk.registration.di.registrationModule
 import com.dawidk.search.di.searchModule
 import com.dawidk.settings.di.settingsModule
 import com.dawidk.videoplayer.di.videoModule
-import leakcanary.AppWatcher
-import leakcanary.ReachabilityWatcher
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.fragment.koin.fragmentFactory
