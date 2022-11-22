@@ -13,7 +13,7 @@ val episodesModule = module {
     viewModel { EpisodesViewModel(get()) }
     viewModel { EpisodeDetailsViewModel(get(), get(), get()) }
     single { FetchEpisodesListUseCase(get(), get(), get()) }
-    single { EpisodesNavigator(get(), get()) }
-    single { EpisodeDetailsNavigator(get(), get()) }
+    single { EpisodesNavigator(get()) }
+    single { EpisodeDetailsNavigator(get()) }
     single { EpisodeDetailsItemsProvider() }
 }

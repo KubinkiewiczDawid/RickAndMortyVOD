@@ -1,6 +1,5 @@
 package com.dawidk.episodes.navigation
 
-import android.content.Context
 import android.net.Uri
 import androidx.navigation.NavController
 import com.dawidk.common.NavigationDirections
@@ -11,14 +10,12 @@ import com.dawidk.common.video.VideoType
 import com.dawidk.episodes.R
 
 class EpisodesNavigator(
-    context: Context,
     private val videoPlayerActivityNavigator: VideoPlayerActivityNavigator
 ) : Navigator {
 
     override var navController: NavController? = null
     private val _navController: NavController
         get() = navController!!
-    private val resource = context.resources
 
     override fun navigateTo(screen: NavigatorScreen) {
         when (screen) {

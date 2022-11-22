@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val charactersModule = module {
     viewModel { CharacterHomeViewModel(get(), get()) }
     viewModel { CharacterDetailsViewModel(get(), get()) }
-    single { CharactersNavigator(get()) }
-    single { CharacterDetailsNavigator(get()) }
+    single { CharactersNavigator() }
+    single { CharacterDetailsNavigator() }
     single { CharacterDetailsItemsProvider() }
 }

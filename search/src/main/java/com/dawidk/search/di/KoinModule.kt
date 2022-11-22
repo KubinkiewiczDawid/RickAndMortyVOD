@@ -9,5 +9,5 @@ import org.koin.dsl.module
 val searchModule = module {
     viewModel { SearchViewModel(get()) }
     single { SearchItemsUseCase(get(), get(), get()) }
-    single { SearchNavigator(get()) }
+    single { SearchNavigator() }
 }

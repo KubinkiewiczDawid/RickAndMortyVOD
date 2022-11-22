@@ -9,6 +9,6 @@ import org.koin.dsl.module
 
 val settingsModule = module {
     viewModel { SettingsViewModel(get()) }
-    single { SettingsNavigator(get(), get()) }
+    single { SettingsNavigator(get()) }
     single<SettingsActivityNavigator> { SettingsActivityNavigatorHandler(get()) }
 }

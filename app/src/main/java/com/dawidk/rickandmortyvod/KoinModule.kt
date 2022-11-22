@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val appModule = module {
     viewModel { MainViewModel() }
     viewModel { SplashViewModel(get(), get(), get(), get(), get(), get(), get()) }
-    single { MainNavigator(get(), get()) }
+    single { MainNavigator(get()) }
     single<MainActivityNavigator> { MainActivityNavigatorHandler(get()) }
     single { CheckForNewEpisodeUseCase(get(), get()) }
 }

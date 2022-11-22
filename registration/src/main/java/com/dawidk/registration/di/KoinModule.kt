@@ -18,7 +18,7 @@ val registrationModule = module {
     viewModel { SignInViewModel(get(), get(), get(), get(), get()) }
     viewModel { SignUpViewModel(get(), get(), get()) }
     single<GoogleClientApi> { GoogleClientApiWrapper(get()) }
-    single { RegistrationNavigator(get(), get()) }
+    single { RegistrationNavigator(get()) }
     single<FirebaseAuthApi> { FirebaseAuthClient() }
     single<RegistrationActivityNavigator> { RegistrationActivityNavigatorHandler(get()) }
     single { ErrorMessageProvider(androidContext().resources) }

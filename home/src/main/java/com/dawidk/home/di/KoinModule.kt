@@ -15,7 +15,7 @@ val homeModule = module {
     factory { FetchPlaylistsUseCase(get(), get(), get(), get()) }
     factory { FetchCarouselItemsUseCase(get(), get(), get(), get(), get(), get(), get()) }
     factory { FetchHomeItemsUseCase(get(), get(), get()) }
-    single { HomeNavigator(get(), get()) }
+    single { HomeNavigator(get()) }
     factory { PlaylistCreator(get(), get(), get()) }
     factory { LastSeenPlaylistCreator(get()) }
 }

@@ -1,22 +1,17 @@
 package com.dawidk.characters.charactersHome.navigation
 
-import android.content.Context
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import com.dawidk.characters.R
-import com.dawidk.characters.characterDetails.CharacterDetailsFragmentDirections
 import com.dawidk.common.NavigationDirections
 import com.dawidk.common.navigation.Navigator
 import com.dawidk.common.navigation.NavigatorScreen
 
 class CharactersNavigator(
-    context: Context
 ) : Navigator {
 
     override var navController: NavController? = null
     private val _navController: NavController
         get() = navController!!
-    private val resource = context.resources
 
     override fun navigateTo(screen: NavigatorScreen) {
         when (screen) {
