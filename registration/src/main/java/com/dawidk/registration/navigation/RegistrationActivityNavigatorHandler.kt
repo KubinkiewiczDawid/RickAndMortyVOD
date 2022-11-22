@@ -11,8 +11,11 @@ class RegistrationActivityNavigatorHandler(
 ) : RegistrationActivityNavigator {
 
     override fun startRegistrationActivity() {
-        val intent = Intent(context, RegistrationActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        val intent = Intent(context, RegistrationActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
         ContextCompat.startActivity(context, intent, null)
     }
 }
