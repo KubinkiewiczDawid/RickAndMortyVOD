@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
@@ -60,13 +61,24 @@ class ErrorDialogFragment : DialogFragment(R.layout.fragment_error_dialog) {
     }
 
     private fun setBlur() {
-        BlurredBitmap.takeScreenShot(requireActivity())?.let { bitmap ->
-            val rootView: View = binding.root
-            val blurBitmap = BlurredBitmap.getBlur(context, bitmap)
-            val crossFadeTransition = createTransitionDrawable(blurBitmap)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            BlurredBitmap.takeScreenShot(requireActivity()) { bitmap ->
+                val rootView: View = binding.root
+                val blurBitmap = BlurredBitmap.getBlur(context, bitmap)
+                val crossFadeTransition = createTransitionDrawable(blurBitmap)
 
-            rootView.background = crossFadeTransition
-            crossFadeTransition?.startTransition(CROSS_FADE_DURATION)
+                rootView.background = crossFadeTransition
+                crossFadeTransition?.startTransition(CROSS_FADE_DURATION)
+            }
+        } else {
+            BlurredBitmap.takeScreenShot(requireActivity())?.let { bitmap ->
+                val rootView: View = binding.root
+                val blurBitmap = BlurredBitmap.getBlur(context, bitmap)
+                val crossFadeTransition = createTransitionDrawable(blurBitmap)
+
+                rootView.background = crossFadeTransition
+                crossFadeTransition?.startTransition(CROSS_FADE_DURATION)
+            }
         }
     }
 

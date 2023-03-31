@@ -4,14 +4,20 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Point
+import android.graphics.Rect
 import android.os.Build
+import android.os.Build.VERSION_CODES
+import android.os.Handler
+import android.os.Looper
 import android.renderscript.Allocation
 import android.renderscript.Element
 import android.renderscript.RenderScript
 import android.renderscript.ScriptIntrinsicBlur
 import android.view.Display
+import android.view.PixelCopy
 import android.view.View
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
@@ -58,6 +64,28 @@ object BlurredBitmap {
             Bitmap.createBitmap(bitmap, 0, statusBarHeight, width, height - statusBarHeight)
         view.destroyDrawingCache()
         return finalBitmap
+    }
+
+    @RequiresApi(VERSION_CODES.O)
+    fun takeScreenShot(activity: Activity, callback: (Bitmap) -> Unit) {
+        activity.window?.let { window ->
+            val view = activity.window.decorView.rootView
+            view.post(kotlinx.coroutines.Runnable {
+                val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+                val locationOfViewInWindow = IntArray(2)
+                view.getLocationInWindow(locationOfViewInWindow)
+                try {
+                    PixelCopy.request(window, Rect(locationOfViewInWindow[0], locationOfViewInWindow[1], locationOfViewInWindow[0] + view.width, locationOfViewInWindow[1] + view.height), bitmap, { copyResult ->
+                        if (copyResult == PixelCopy.SUCCESS) {
+                            callback(bitmap)
+                        }
+                    }, Handler(Looper.getMainLooper()))
+                } catch (e: IllegalArgumentException) {
+                    // PixelCopy may throw IllegalArgumentException, make sure to handle it
+                    e.printStackTrace()
+                }
+            })
+        }
     }
 
     private fun getDeviceWidth(view: View?): Int {
