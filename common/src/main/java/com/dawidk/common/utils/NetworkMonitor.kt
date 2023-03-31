@@ -5,12 +5,10 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import android.os.Build
+import android.os.Build.VERSION_CODES
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.component.getScopeName
@@ -21,7 +19,7 @@ import java.net.URL
 private const val REACHABILITY_SERVER = "https://google.com"
 
 class NetworkMonitor(private val context: Context) :
-    LifecycleObserver {
+    DefaultLifecycleObserver {
 
     private var connectivityManager: ConnectivityManager? = null
     private val _state: MutableStateFlow<Boolean?> = MutableStateFlow(null)
@@ -44,15 +42,18 @@ class NetworkMonitor(private val context: Context) :
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun init() {
+    override fun onCreate(owner: LifecycleOwner) {
         connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun registerNetworkCallback(owner: LifecycleOwner) {
+    @RequiresApi(VERSION_CODES.O)
+    override fun onStart(owner: LifecycleOwner) {
+        registerNetworkCallback()
+    }
+
+    @RequiresApi(VERSION_CODES.O)
+    private fun registerNetworkCallback() {
         if (!isNetworkCallbackRegistered) {
             val networkRequest =
                 NetworkRequest.Builder().addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
@@ -63,8 +64,11 @@ class NetworkMonitor(private val context: Context) :
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun unregisterNetworkCallback(owner: LifecycleOwner) {
+    override fun onDestroy(owner: LifecycleOwner) {
+        unregisterNetworkCallback(owner)
+    }
+
+    private fun unregisterNetworkCallback(owner: LifecycleOwner) {
         if (owner.getScopeName().toString()
                 .contains("MainActivity") && isNetworkCallbackRegistered
         ) {
