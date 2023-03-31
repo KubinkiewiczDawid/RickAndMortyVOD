@@ -51,7 +51,7 @@ class NotificationProvider(
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent.action = Intent.ACTION_VIEW
             intent.data = Uri.parse(it)
-            return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+            return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
         } ?: return null
     }
 

@@ -145,6 +145,7 @@ class SignInFragment :
                                 it.email
                             )
                         )
+                        else -> {}
                     }
                 }
             }

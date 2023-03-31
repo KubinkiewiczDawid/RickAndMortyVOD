@@ -165,6 +165,7 @@ class VideoPlayerFragment :
                             )
                             isConnected = false
                         }
+                        else -> {}
                     }
                 }
             }

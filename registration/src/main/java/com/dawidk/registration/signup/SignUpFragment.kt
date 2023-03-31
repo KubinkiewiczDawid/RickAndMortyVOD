@@ -102,6 +102,7 @@ class SignUpFragment :
                                 it.email
                             )
                         )
+                        else -> {}
                     }
                 }
             }

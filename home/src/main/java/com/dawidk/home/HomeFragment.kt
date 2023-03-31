@@ -104,6 +104,7 @@ class HomeFragment :
                         is CarouselItem.EpisodeItem -> {
                             viewModel.onAction(HomeAction.NavigateToEpisodeDetailsScreen(it.id))
                         }
+                        else -> {}
                     }
                 }
             }
@@ -118,6 +119,7 @@ class HomeFragment :
                                 viewModel.onAction(HomeAction.NavigateToVideoPlayerScreen(it.id))
                             }
                         }
+                        else -> {}
                     }
                 }
             }
@@ -135,6 +137,7 @@ class HomeFragment :
                         is PlaylistItem.EpisodeItem -> {
                             viewModel.onAction(HomeAction.NavigateToEpisodeDetailsScreen(it.id))
                         }
+                        else -> {}
                     }
                 }
             }
@@ -149,6 +152,7 @@ class HomeFragment :
                                 viewModel.onAction(HomeAction.NavigateToVideoPlayerScreen(it.id))
                             }
                         }
+                        else -> {}
                     }
                 }
             }

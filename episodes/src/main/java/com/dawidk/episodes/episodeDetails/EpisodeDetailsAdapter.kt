@@ -170,27 +170,23 @@ class EpisodeDetailsAdapter(private val episodeId: String) :
 
                 scope = CoroutineScope(Dispatchers.Main)
                 scope.launch {
-                    async {
-                        if (memoryCacheKey != null) {
-                            episodeImageView.load(memoryCacheKey) {
-                                memoryCachePolicy(CachePolicy.ENABLED)
-                            }
-                        } else {
-                            setEpisodeImage(
-                                episodeImageView,
-                                episodeImageView.context,
-                                characters,
-                                season,
-                                IMAGES_NUMBER
-                            )
+                    if (memoryCacheKey != null) {
+                        episodeImageView.load(memoryCacheKey) {
+                            memoryCachePolicy(CachePolicy.ENABLED)
                         }
-                    }
-                    async {
-                        episodeProgressBarHandler.setProgressBar(
-                            binding.episodeProgressBar,
-                            episodeId
+                    } else {
+                        setEpisodeImage(
+                            episodeImageView,
+                            episodeImageView.context,
+                            characters,
+                            season,
+                            IMAGES_NUMBER
                         )
                     }
+                    episodeProgressBarHandler.setProgressBar(
+                        binding.episodeProgressBar,
+                        episodeId
+                    )
                 }
             }
         }

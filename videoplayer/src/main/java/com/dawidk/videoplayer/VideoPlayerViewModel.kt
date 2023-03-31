@@ -88,6 +88,7 @@ class VideoPlayerViewModel(
         this.videoId = videoId
         when (videoType) {
             VideoType.EPISODE -> fetchEpisodeById(videoId)
+            else -> {}
         }
     }
 

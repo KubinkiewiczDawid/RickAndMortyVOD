@@ -78,6 +78,7 @@ abstract class BaseFragment<EVENT : ViewEvent, ACTION : ViewAction, STATE : View
                                 Throwable(getString(R.string.no_internet_error_message))
                             )
                         }
+                        else -> {}
                     }
                 }
             }

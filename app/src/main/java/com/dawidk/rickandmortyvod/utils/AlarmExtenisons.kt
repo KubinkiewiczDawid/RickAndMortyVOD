@@ -12,7 +12,7 @@ fun Context.createUpdateServiceIntervalAlarm() {
             this,
             0,
             Intent(this, NewEpisodeCheckerService::class.java),
-            0
+            PendingIntent.FLAG_IMMUTABLE
         )
     val alarm = getSystemService(Context.ALARM_SERVICE) as AlarmManager
     alarm.cancel(alarmIntent)

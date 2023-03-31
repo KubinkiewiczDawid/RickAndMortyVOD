@@ -17,7 +17,6 @@ import com.dawidk.home.model.PlaylistItem
 import com.dawidk.home.navigation.HomeNavigator
 import com.dawidk.home.navigation.Screen
 import com.dawidk.videoplayer.cast.service.CastVideoService
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -75,6 +74,7 @@ class SeeAllFragment : Fragment(R.layout.see_all_fragment) {
                         is PlaylistItem.EpisodeItem -> {
                             homeNavigator.navigateTo(Screen.EpisodeDetails(it.id))
                         }
+                        else -> {}
                     }
                 }
             }
@@ -89,6 +89,7 @@ class SeeAllFragment : Fragment(R.layout.see_all_fragment) {
                                 homeNavigator.navigateTo(Screen.VideoPlayer(it.id))
                             }
                         }
+                        else -> {}
                     }
                 }
             }

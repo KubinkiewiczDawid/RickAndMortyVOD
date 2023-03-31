@@ -28,6 +28,7 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
                         fragment.viewLifecycleOwnerLiveData.removeObserver(this@FragmentViewBindingDelegate)
                         fragment.lifecycle.removeObserver(this)
                     }
+                    else -> {}
                 }
             }
         })

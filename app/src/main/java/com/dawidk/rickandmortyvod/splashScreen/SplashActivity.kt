@@ -18,8 +18,10 @@ import com.dawidk.common.utils.NetworkMonitor
 import com.dawidk.core.domain.model.AccountInfo
 import com.dawidk.registration.RegistrationActivity
 import com.dawidk.videoplayer.R
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -90,6 +92,7 @@ class SplashActivity : AppCompatActivity(),
                             activityScope.cancel()
                             showError(it.exception)
                         }
+                        else -> {}
                     }
                 }
             }
@@ -119,6 +122,7 @@ class SplashActivity : AppCompatActivity(),
                             activityScope.cancel()
                             showError(Throwable(getString(R.string.no_internet_error_message)))
                         }
+                        else -> {}
                     }
                 }
             }
