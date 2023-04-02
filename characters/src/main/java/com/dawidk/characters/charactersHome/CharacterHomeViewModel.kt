@@ -54,7 +54,7 @@ class CharacterHomeViewModel(
     private fun navigateToCharacterDetails(id: String) {
         viewModelScope.launch {
             homeScreenDataStoreRepository.updateLastSeenCharacter(id)
-            emitEvent(CharacterEvent.NavigateToCharacterDetails(id))
         }
+        emitEvent(CharacterEvent.NavigateToCharacterDetails(id))
     }
 }

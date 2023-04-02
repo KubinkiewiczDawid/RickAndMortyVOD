@@ -43,14 +43,10 @@ class EpisodeDetailsViewModel(
     }
 
     private fun navigateToCharacterDetails(id: String) {
-        viewModelScope.launch {
-            emitEvent(EpisodeDetailsEvent.NavigateToCharacterDetails(id))
-        }
+        emitEvent(EpisodeDetailsEvent.NavigateToCharacterDetails(id))
     }
 
     private fun navigateToVideoPlayerScreen(id: String) {
-        viewModelScope.launch {
-            emitEvent(EpisodeDetailsEvent.NavigateToVideoPlayerScreen(id))
-        }
+        emitEvent(EpisodeDetailsEvent.NavigateToVideoPlayerScreen(id))
     }
 }

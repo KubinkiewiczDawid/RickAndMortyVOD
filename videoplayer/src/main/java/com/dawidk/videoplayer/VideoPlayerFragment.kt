@@ -10,12 +10,12 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
 import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
 import com.dawidk.common.video.VideoType
 import com.dawidk.core.utils.DataLoadingException
 import com.dawidk.videoplayer.cast.ExpandedControlsActivity
@@ -153,21 +153,17 @@ class VideoPlayerFragment :
 
     private suspend fun checkInternetConnection(): Boolean {
         var isConnected = true
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                networkMonitor.state.collect {
-                    when (it) {
-                        true -> isConnected = true
-                        false -> {
-                            ErrorDialogFragment.show(
-                                childFragmentManager,
-                                Throwable(getString(R.string.no_internet_error_message))
-                            )
-                            isConnected = false
-                        }
-                        else -> {}
-                    }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, networkMonitor.state) {
+            when (it) {
+                true -> isConnected = true
+                false -> {
+                    ErrorDialogFragment.show(
+                        childFragmentManager,
+                        Throwable(getString(R.string.no_internet_error_message))
+                    )
+                    isConnected = false
                 }
+                else -> {}
             }
         }.join()
         return isConnected

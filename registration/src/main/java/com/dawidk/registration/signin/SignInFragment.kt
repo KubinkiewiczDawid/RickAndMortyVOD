@@ -8,19 +8,14 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
 import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.registration.AuthEvent
 import com.dawidk.common.registration.FirebaseAuthApi
 import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
 import com.dawidk.common.utils.fetchClick
 import com.dawidk.registration.R
 import com.dawidk.registration.R.string
@@ -30,7 +25,10 @@ import com.dawidk.registration.navigation.Screen
 import com.dawidk.registration.signin.mvi.SignInAction
 import com.dawidk.registration.signin.mvi.SignInEvent
 import com.dawidk.registration.signin.mvi.SignInState
-import kotlinx.coroutines.launch
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -95,59 +93,41 @@ class SignInFragment :
     }
 
     private fun registerClickEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                binding.emailSignInButton.fetchClick().collect {
-                    val email = binding.emailEditText.text.toString()
-                    val password = binding.passwordEditText.text.toString()
-                    viewModel.onAction(
-                        SignInAction.EmailSignIn(
-                            email,
-                            password
-                        )
-                    )
-                }
-            }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, binding.emailSignInButton.fetchClick()) {
+            val email = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            viewModel.onAction(
+                SignInAction.EmailSignIn(
+                    email,
+                    password
+                )
+            )
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                binding.googleSignInButton.fetchClick().collect {
-                    viewModel.onAction(
-                        SignInAction.GoogleSignIn(
-                            resultLauncher
-                        )
-                    )
-                }
-            }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, binding.googleSignInButton.fetchClick()) {
+            viewModel.onAction(
+                SignInAction.GoogleSignIn(
+                    resultLauncher
+                )
+            )
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                binding.signUpLink.fetchClick().collect {
-                    viewModel.onAction(SignInAction.NavigateToSignUpScreen)
-                }
-            }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, binding.signUpLink.fetchClick()) {
+            viewModel.onAction(SignInAction.NavigateToSignUpScreen)
         }
     }
 
     private fun registerFirebaseAuthClientListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                firebaseAuthClient.event.collect {
-                    when (it) {
-                        is AuthEvent.SignInUnsuccessful -> viewModel.onAction(
-                            SignInAction.SignInUnsuccessful(it.exception)
-                        )
-                        is AuthEvent.SignedIn -> viewModel.onAction(
-                            SignInAction.SaveCredentials(
-                                it.userId,
-                                it.email
-                            )
-                        )
-                        else -> {}
-                    }
-                }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, firebaseAuthClient.event) {
+            when (it) {
+                is AuthEvent.SignInUnsuccessful -> viewModel.onAction(
+                    SignInAction.SignInUnsuccessful(it.exception)
+                )
+                is AuthEvent.SignedIn -> viewModel.onAction(
+                    SignInAction.SaveCredentials(
+                        it.userId,
+                        it.email
+                    )
+                )
+                else -> {}
             }
         }
     }

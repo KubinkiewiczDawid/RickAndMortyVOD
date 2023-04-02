@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.registration.AuthEvent
 import com.dawidk.common.registration.FirebaseAuthApi
 import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
 import com.dawidk.common.utils.fetchClick
 import com.dawidk.registration.R
 import com.dawidk.registration.R.string
@@ -22,7 +20,7 @@ import com.dawidk.registration.navigation.Screen
 import com.dawidk.registration.signup.mvi.SignUpAction
 import com.dawidk.registration.signup.mvi.SignUpEvent
 import com.dawidk.registration.signup.mvi.SignUpState
-import kotlinx.coroutines.launch
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -68,43 +66,35 @@ class SignUpFragment :
     }
 
     private fun registerClickEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                binding.signUpButton.fetchClick().collect {
-                    val email = binding.signupEmailEditText.text.toString()
-                    val password = binding.signupPasswordEditText.text.toString()
-                    val confirmedPassword = binding.confirmPasswordEditText.text.toString()
-                    viewModel.onAction(
-                        SignUpAction.CreateAccount(
-                            email,
-                            password,
-                            confirmedPassword
-                        )
-                    )
-                }
-            }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, binding.signUpButton.fetchClick()) {
+            val email = binding.signupEmailEditText.text.toString()
+            val password = binding.signupPasswordEditText.text.toString()
+            val confirmedPassword = binding.confirmPasswordEditText.text.toString()
+            viewModel.onAction(
+                SignUpAction.CreateAccount(
+                    email,
+                    password,
+                    confirmedPassword
+                )
+            )
         }
     }
 
     private fun registerFirebaseAuthClientListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                firebaseAuthClient.event.collect {
-                    when (it) {
-                        is AuthEvent.SignUpUnsuccessful -> viewModel.onAction(
-                            SignUpAction.SignUpUnsuccessful(
-                                it.exception
-                            )
-                        )
-                        is AuthEvent.SignedUp -> viewModel.onAction(
-                            SignUpAction.SignUp(
-                                it.userId,
-                                it.email
-                            )
-                        )
-                        else -> {}
-                    }
-                }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, firebaseAuthClient.event) {
+            when (it) {
+                is AuthEvent.SignUpUnsuccessful -> viewModel.onAction(
+                    SignUpAction.SignUpUnsuccessful(
+                        it.exception
+                    )
+                )
+                is AuthEvent.SignedUp -> viewModel.onAction(
+                    SignUpAction.SignUp(
+                        it.userId,
+                        it.email
+                    )
+                )
+                else -> {}
             }
         }
     }

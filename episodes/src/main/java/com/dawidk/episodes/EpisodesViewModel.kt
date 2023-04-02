@@ -54,26 +54,20 @@ class EpisodesViewModel(
     }
 
     private fun navigateToSeasonsList() {
-        viewModelScope.launch {
-            emitEvent(
-                EpisodeEvent.NavigateToSeasonsList(
-                    filteredEpisodesData.chosenSeason,
-                    episodesData.episodesMap.keys.toList()
-                )
+        emitEvent(
+            EpisodeEvent.NavigateToSeasonsList(
+                filteredEpisodesData.chosenSeason,
+                episodesData.episodesMap.keys.toList()
             )
-        }
+        )
     }
 
     private fun navigateToEpisodeDetails(id: String) {
-        viewModelScope.launch {
-            emitEvent(EpisodeEvent.NavigateToEpisodeDetails(id))
-        }
+        emitEvent(EpisodeEvent.NavigateToEpisodeDetails(id))
     }
 
     private fun navigateToVideoPlayerScreen(episodeId: String) {
-        viewModelScope.launch {
-            emitEvent(EpisodeEvent.NavigateToVideoPlayerScreen(episodeId))
-        }
+        emitEvent(EpisodeEvent.NavigateToVideoPlayerScreen(episodeId))
     }
 
 }

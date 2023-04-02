@@ -5,16 +5,24 @@ import com.dawidk.core.datastore.HomeScreenItem
 import com.dawidk.core.domain.model.Character
 import com.dawidk.core.domain.model.Episode
 import com.dawidk.core.domain.model.Location
-import com.dawidk.core.executors.*
+import com.dawidk.core.executors.FetchCharacterByIdExecutor
+import com.dawidk.core.executors.FetchCharactersListInfoExecutor
+import com.dawidk.core.executors.FetchEpisodeByIdExecutor
+import com.dawidk.core.executors.FetchEpisodesListInfoExecutor
+import com.dawidk.core.executors.FetchLocationByIdExecutor
+import com.dawidk.core.executors.FetchLocationsListInfoExecutor
 import com.dawidk.core.utils.DataLoadingException
 import com.dawidk.home.model.CarouselItem
 import com.dawidk.home.model.CarouselItems
 import com.dawidk.home.utils.mapToCarouselItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -38,8 +46,8 @@ class FetchCarouselItemsUseCase(
     private val homeScreenDataStoreRepository: HomeScreenDataStoreRepository
 ) {
 
-    suspend operator fun invoke(): Flow<List<CarouselItems>> = flow {
-        homeScreenDataStoreRepository.homeScreenFlow.collect {
+    suspend operator fun invoke(): Flow<List<CarouselItems>> = channelFlow {
+        homeScreenDataStoreRepository.homeScreenFlow.collectLatest {
             val carousels = emptyList<CarouselItems>().toMutableList()
             it.carouselList.forEachIndexed { i, carousel ->
                 val items: MutableList<CarouselItem> = emptyList<CarouselItem>().toMutableList()
@@ -68,7 +76,7 @@ class FetchCarouselItemsUseCase(
                     carouselItems.items = itemsList.toList()
                 }
             }
-            emit(carousels)
+            send(carousels)
         }
     }
 
@@ -81,13 +89,17 @@ class FetchCarouselItemsUseCase(
     private suspend fun getCarouselItems(): MutableList<CarouselItem> {
         val carouselItems = emptyList<CarouselItem>().toMutableList()
         val items = emptyList<Pair<String, HomeScreenItem.ItemType>>().toMutableList()
-        val numberOfCharacters = fetchCharactersListInfoExecutor.getCharactersListInfo().count
-        val numberOfLocations = fetchLocationsListInfoExecutor.getLocationsListInfo().count
-        val numberOfEpisodes = fetchEpisodesListInfoExecutor.getEpisodesListInfo().count
+        coroutineScope {
+            val numberInformation = listOf (
+                async { fetchCharactersListInfoExecutor.getCharactersListInfo().count },
+                async { fetchLocationsListInfoExecutor.getLocationsListInfo().count },
+                async { fetchEpisodesListInfoExecutor.getEpisodesListInfo().count }
+            ).awaitAll()
 
-        addCarouselItems(items, numberOfCharacters, NUMBER_OF_CHARACTERS, CHARACTER)
-        addCarouselItems(items, numberOfLocations, NUMBER_OF_LOCATIONS, LOCATION)
-        addCarouselItems(items, numberOfEpisodes, NUMBER_OF_EPISODES, EPISODE)
+            addCarouselItems(items, numberInformation[0], NUMBER_OF_CHARACTERS, CHARACTER)
+            addCarouselItems(items, numberInformation[1], NUMBER_OF_LOCATIONS, LOCATION)
+            addCarouselItems(items, numberInformation[2], NUMBER_OF_EPISODES, EPISODE)
+        }
 
         return carouselItems
     }

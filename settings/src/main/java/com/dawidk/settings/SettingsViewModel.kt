@@ -23,7 +23,7 @@ class SettingsViewModel(
                     updateState(SettingsState.DataLoaded(action.data))
                 }
             }
-            is SettingsAction.NavigateToSignInScreen -> viewModelScope.launch { navigateToSignInFragment() }
+            is SettingsAction.NavigateToSignInScreen -> navigateToSignInFragment()
         }
     }
 
@@ -35,16 +35,12 @@ class SettingsViewModel(
         }
     }
 
-    private suspend fun clearUserData() {
+    private fun navigateToSignInFragment() {
         viewModelScope.launch {
-            userCredentialsDataStoreRepository.clearUserCredentials()
-        }.join()
-    }
-
-    private suspend fun navigateToSignInFragment() {
-        viewModelScope.launch {
-            clearUserData()
-        }.join()
-        emitEvent(SettingsEvent.NavigateToSignInScreen)
+            launch {
+                userCredentialsDataStoreRepository.clearUserCredentials()
+            }.join()
+            emitEvent(SettingsEvent.NavigateToSignInScreen)
+        }
     }
 }

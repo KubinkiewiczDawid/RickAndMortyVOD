@@ -6,22 +6,22 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
 import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
 import com.dawidk.common.utils.hideKeyboardOnAction
 import com.dawidk.common.utils.isTablet
 import com.dawidk.search.databinding.SearchFragmentBinding
 import com.dawidk.search.model.SearchItem
-import com.dawidk.search.navigation.Screen
-import com.dawidk.search.navigation.SearchNavigator
 import com.dawidk.search.mvi.SearchAction
 import com.dawidk.search.mvi.SearchEvent
 import com.dawidk.search.mvi.SearchState
+import com.dawidk.search.navigation.Screen
+import com.dawidk.search.navigation.SearchNavigator
 import com.dawidk.search.ui.SearchAdapter
 import com.dawidk.search.utils.textChanges
 import kotlinx.coroutines.flow.debounce
@@ -139,19 +139,15 @@ class SearchFragment :
     }
 
     private fun registerClickEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                searchAdapter?.clickEvent?.collect {
-                    when (it) {
-                        is SearchItem.CharacterItem -> {
-                            viewModel.onAction(SearchAction.NavigateToCharacterDetailsScreen(it.id))
-                        }
-                        is SearchItem.EpisodeItem -> {
-                            viewModel.onAction(SearchAction.NavigateToEpisodeDetailsScreen(it.id))
-                        }
-                        is SearchItem.LocationItem -> {}
-                    }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, searchAdapter?.clickEvent) {
+            when (it) {
+                is SearchItem.CharacterItem -> {
+                    viewModel.onAction(SearchAction.NavigateToCharacterDetailsScreen(it.id))
                 }
+                is SearchItem.EpisodeItem -> {
+                    viewModel.onAction(SearchAction.NavigateToEpisodeDetailsScreen(it.id))
+                }
+                is SearchItem.LocationItem -> {}
             }
         }
     }

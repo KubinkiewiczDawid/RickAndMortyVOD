@@ -8,7 +8,6 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -16,18 +15,19 @@ import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
 import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
 import com.dawidk.common.utils.selectLayoutManager
 import com.dawidk.core.domain.model.EpisodeFilter
 import com.dawidk.episodes.databinding.EpisodesFragmentBinding
+import com.dawidk.episodes.mvi.EpisodeAction
+import com.dawidk.episodes.mvi.EpisodeEvent
+import com.dawidk.episodes.mvi.EpisodeState
 import com.dawidk.episodes.navigation.EpisodesNavigator
 import com.dawidk.episodes.navigation.Screen
 import com.dawidk.episodes.seasonpicker.SEASONS_LIST
 import com.dawidk.episodes.seasonpicker.SELECTED_SEASON
 import com.dawidk.episodes.seasonpicker.SeasonPickerFragment
 import com.dawidk.episodes.seasonpicker.UPDATE_FUNCTION
-import com.dawidk.episodes.mvi.EpisodeAction
-import com.dawidk.episodes.mvi.EpisodeEvent
-import com.dawidk.episodes.mvi.EpisodeState
 import com.dawidk.episodes.utils.mapToPrettySeasonName
 import com.dawidk.videoplayer.cast.service.CastVideoService
 import kotlinx.coroutines.launch
@@ -106,21 +106,12 @@ class EpisodesFragment :
     }
 
     private fun registerClickEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                episodesAdapter?.clickEvent?.collect {
-                    viewModel.onAction(EpisodeAction.NavigateToEpisodeDetailsScreen(it.id))
-                }
-            }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, episodesAdapter?.clickEvent) {
+            viewModel.onAction(EpisodeAction.NavigateToEpisodeDetailsScreen(it.id))
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                episodesAdapter?.playButtonClickEvent?.collect {
-                    if (it.id != castVideoService.castedVideoId) {
-                        viewModel.onAction(EpisodeAction.NavigateToVideoPlayerScreen(it.id))
-                    }
-                }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, episodesAdapter?.playButtonClickEvent) {
+            if (it.id != castVideoService.castedVideoId) {
+                viewModel.onAction(EpisodeAction.NavigateToVideoPlayerScreen(it.id))
             }
         }
     }

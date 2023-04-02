@@ -3,27 +3,23 @@ package com.dawidk.characters.characterDetails
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dawidk.characters.R
-import com.dawidk.characters.characterDetails.navigation.CharacterDetailsNavigator
-import com.dawidk.characters.characterDetails.navigation.Screen
 import com.dawidk.characters.characterDetails.mvi.CharacterDetailsAction
 import com.dawidk.characters.characterDetails.mvi.CharacterDetailsEvent
 import com.dawidk.characters.characterDetails.mvi.CharacterDetailsState
+import com.dawidk.characters.characterDetails.navigation.CharacterDetailsNavigator
+import com.dawidk.characters.characterDetails.navigation.Screen
 import com.dawidk.characters.databinding.CharacterDetailsFragmentBinding
 import com.dawidk.characters.model.CharacterItem
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
 import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
-import com.dawidk.core.utils.DataLoadingException
-import kotlinx.coroutines.launch
+import com.dawidk.common.utils.collectFromState
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -93,40 +89,26 @@ class CharacterDetailsFragment :
     }
 
     private fun registerClickEventListeners() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                characterDetailsAdapter?.onEpisodeClickEvent?.collect {
-                    viewModel.onAction(CharacterDetailsAction.NavigateToEpisodeDetailsScreen(it.id))
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, characterDetailsAdapter?.onEpisodeClickEvent) {
+            viewModel.onAction(CharacterDetailsAction.NavigateToEpisodeDetailsScreen(it.id))
+        }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, characterDetailsAdapter?.onTabClickEvent) {
+            when (it) {
+                resources.getString(R.string.episodes) -> {
+                    viewModel.onAction(CharacterDetailsAction.GetEpisodes)
+                }
+                resources.getString(R.string.locations) -> {
+                    viewModel.onAction(CharacterDetailsAction.GetLocations)
                 }
             }
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                characterDetailsAdapter?.onTabClickEvent?.collect {
-                    when (it) {
-                        resources.getString(R.string.episodes) -> {
-                            viewModel.onAction(CharacterDetailsAction.GetEpisodes)
-                        }
-                        resources.getString(R.string.locations) -> {
-                            viewModel.onAction(CharacterDetailsAction.GetLocations)
-                        }
-                    }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, characterDetailsAdapter?.selectedTabEvent) {
+            when (it) {
+                resources.getString(R.string.episodes) -> {
+                    viewModel.onAction(CharacterDetailsAction.GetEpisodes)
                 }
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                characterDetailsAdapter?.selectedTabEvent?.collect {
-                    when (it) {
-                        resources.getString(R.string.episodes) -> {
-                            viewModel.onAction(CharacterDetailsAction.GetEpisodes)
-                        }
-                        resources.getString(R.string.locations) -> {
-                            viewModel.onAction(CharacterDetailsAction.GetLocations)
-                        }
-                    }
+                resources.getString(R.string.locations) -> {
+                    viewModel.onAction(CharacterDetailsAction.GetLocations)
                 }
             }
         }

@@ -12,16 +12,16 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.cast.framework.CastButtonFactory
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.navigation.NavigationBarView
+import com.dawidk.common.navigation.BottomNavigationHandler
+import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
+import com.dawidk.common.utils.setMargins
+import com.dawidk.common.utils.toPx
 import com.dawidk.rickandmortyvod.databinding.ActivityMainBinding
 import com.dawidk.rickandmortyvod.navigation.MainNavigator
 import com.dawidk.rickandmortyvod.navigation.Screen
@@ -29,12 +29,9 @@ import com.dawidk.rickandmortyvod.state.MainAction
 import com.dawidk.rickandmortyvod.state.MainEvent
 import com.dawidk.rickandmortyvod.utils.createUpdateServiceIntervalAlarm
 import com.dawidk.rickandmortyvod.utils.fitSystemWindow
-import com.dawidk.common.navigation.BottomNavigationHandler
-import com.dawidk.common.utils.NetworkMonitor
-import com.dawidk.common.utils.setMargins
-import com.dawidk.common.utils.toPx
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import com.google.android.gms.cast.framework.CastButtonFactory
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.navigation.NavigationBarView
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -87,13 +84,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     private fun registerEventListener() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.event.collect {
-                    when (it) {
-                        is MainEvent.NavigateToSettingsScreen -> navigateToSettingsScreen()
-                    }
-                }
+        this.collectFromState(Lifecycle.State.STARTED, viewModel.event) {
+            when (it) {
+                is MainEvent.NavigateToSettingsScreen -> navigateToSettingsScreen()
             }
         }
     }

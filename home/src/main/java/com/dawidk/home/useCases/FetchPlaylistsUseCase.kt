@@ -8,7 +8,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
@@ -73,7 +72,6 @@ class FetchPlaylistsUseCase(
     }
 
     suspend operator fun invoke(): Flow<List<Playlist>> = flow {
-
         homeScreenDataStoreRepository.homeScreenFlow.combine(firestoreClient.getLastSeenPlaylist()) { playlists, lastSeenPlaylist ->
             val playlistsList = emptyList<Playlist>().toMutableList()
             lastSeenPlaylistCreator.createPlaylist(lastSeenPlaylist)?.let { playlist ->

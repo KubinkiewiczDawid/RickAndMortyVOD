@@ -5,8 +5,6 @@ import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,13 +16,13 @@ import com.dawidk.common.registration.FirebaseAuthApi
 import com.dawidk.common.registration.GoogleClientApi
 import com.dawidk.common.registration.SignState
 import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
 import com.dawidk.settings.databinding.SettingsFragmentBinding
-import com.dawidk.settings.navigation.Screen
-import com.dawidk.settings.navigation.SettingsNavigator
 import com.dawidk.settings.mvi.SettingsAction
 import com.dawidk.settings.mvi.SettingsEvent
 import com.dawidk.settings.mvi.SettingsState
-import kotlinx.coroutines.launch
+import com.dawidk.settings.navigation.Screen
+import com.dawidk.settings.navigation.SettingsNavigator
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -99,35 +97,23 @@ class SettingsFragment :
     }
 
     private fun registerSettingsProviderListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                settingsListProvider.settingsFlow.collect {
-                    settingsAdapter?.submitList(it)
-                }
-            }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, settingsListProvider.settingsFlow) {
+            settingsAdapter?.submitList(it)
         }
     }
 
     private fun registerGoogleClientListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                googleClientApi.event.collect {
-                    if (it is SignState.SignedOut) {
-                        viewModel.onAction(SettingsAction.NavigateToSignInScreen)
-                    }
-                }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, googleClientApi.event) {
+            if (it is SignState.SignedOut) {
+                viewModel.onAction(SettingsAction.NavigateToSignInScreen)
             }
         }
     }
 
     private fun registerFirebaseAuthListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                firebaseAuthClient.event.collect {
-                    if (it is AuthEvent.SignedOut) {
-                        viewModel.onAction(SettingsAction.NavigateToSignInScreen)
-                    }
-                }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, firebaseAuthClient.event) {
+            if (it is AuthEvent.SignedOut) {
+                viewModel.onAction(SettingsAction.NavigateToSignInScreen)
             }
         }
     }

@@ -4,25 +4,23 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
 import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
 import com.dawidk.home.databinding.HomeFragmentBinding
 import com.dawidk.home.model.CarouselItem
 import com.dawidk.home.model.Playlist
 import com.dawidk.home.model.PlaylistItem
-import com.dawidk.home.navigation.HomeNavigator
-import com.dawidk.home.navigation.Screen
 import com.dawidk.home.mvi.HomeAction
 import com.dawidk.home.mvi.HomeEvent
 import com.dawidk.home.mvi.HomeState
+import com.dawidk.home.navigation.HomeNavigator
+import com.dawidk.home.navigation.Screen
 import com.dawidk.videoplayer.cast.service.CastVideoService
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -94,78 +92,56 @@ class HomeFragment :
     }
 
     private fun registerCarouselClickEvent() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeScreenAdapter?.carouselClickEvent?.collect {
-                    when (it) {
-                        is CarouselItem.CharacterItem -> {
-                            viewModel.onAction(HomeAction.NavigateToCharacterDetailsScreen(it.id))
-                        }
-                        is CarouselItem.EpisodeItem -> {
-                            viewModel.onAction(HomeAction.NavigateToEpisodeDetailsScreen(it.id))
-                        }
-                        else -> {}
-                    }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, homeScreenAdapter?.carouselClickEvent) {
+            when (it) {
+                is CarouselItem.CharacterItem -> {
+                    viewModel.onAction(HomeAction.NavigateToCharacterDetailsScreen(it.id))
                 }
+                is CarouselItem.EpisodeItem -> {
+                    viewModel.onAction(HomeAction.NavigateToEpisodeDetailsScreen(it.id))
+                }
+                else -> {}
             }
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeScreenAdapter?.carouselPlayButtonClickEvent?.collect {
-                    when (it) {
-                        is CarouselItem.EpisodeItem -> {
-                            if (it.id != castVideoService.castedVideoId) {
-                                viewModel.onAction(HomeAction.NavigateToVideoPlayerScreen(it.id))
-                            }
-                        }
-                        else -> {}
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, homeScreenAdapter?.carouselPlayButtonClickEvent) {
+            when (it) {
+                is CarouselItem.EpisodeItem -> {
+                    if (it.id != castVideoService.castedVideoId) {
+                        viewModel.onAction(HomeAction.NavigateToVideoPlayerScreen(it.id))
                     }
                 }
+                else -> {}
             }
         }
     }
 
     private fun registerPlaylistClickEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeScreenAdapter?.playlistItemClickEvent?.collect {
-                    when (it) {
-                        is PlaylistItem.CharacterItem -> {
-                            viewModel.onAction(HomeAction.NavigateToCharacterDetailsScreen(it.id))
-                        }
-                        is PlaylistItem.EpisodeItem -> {
-                            viewModel.onAction(HomeAction.NavigateToEpisodeDetailsScreen(it.id))
-                        }
-                        else -> {}
-                    }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, homeScreenAdapter?.playlistItemClickEvent) {
+            when (it) {
+                is PlaylistItem.CharacterItem -> {
+                    viewModel.onAction(HomeAction.NavigateToCharacterDetailsScreen(it.id))
                 }
+                is PlaylistItem.EpisodeItem -> {
+                    viewModel.onAction(HomeAction.NavigateToEpisodeDetailsScreen(it.id))
+                }
+                else -> {}
             }
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeScreenAdapter?.playlistPlayButtonClickEvent?.collect {
-                    when (it) {
-                        is PlaylistItem.EpisodeItem -> {
-                            if (it.id != castVideoService.castedVideoId) {
-                                viewModel.onAction(HomeAction.NavigateToVideoPlayerScreen(it.id))
-                            }
-                        }
-                        else -> {}
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, homeScreenAdapter?.playlistPlayButtonClickEvent) {
+            when (it) {
+                is PlaylistItem.EpisodeItem -> {
+                    if (it.id != castVideoService.castedVideoId) {
+                        viewModel.onAction(HomeAction.NavigateToVideoPlayerScreen(it.id))
                     }
                 }
+                else -> {}
             }
         }
     }
 
     private fun registerSeeAllClickEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeScreenAdapter?.seeAllClickEvent?.collect {
-                    viewModel.onAction(HomeAction.NavigateToSeeAllScreen(it))
-                }
-            }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, homeScreenAdapter?.seeAllClickEvent) {
+            viewModel.onAction(HomeAction.NavigateToSeeAllScreen(it))
         }
     }
 

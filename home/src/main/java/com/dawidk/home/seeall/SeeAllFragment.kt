@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dawidk.common.binding.viewBinding
+import com.dawidk.common.utils.collectFromState
 import com.dawidk.common.utils.isTablet
 import com.dawidk.home.R
 import com.dawidk.home.databinding.SeeAllFragmentBinding
@@ -17,7 +16,6 @@ import com.dawidk.home.model.PlaylistItem
 import com.dawidk.home.navigation.HomeNavigator
 import com.dawidk.home.navigation.Screen
 import com.dawidk.videoplayer.cast.service.CastVideoService
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class SeeAllFragment : Fragment(R.layout.see_all_fragment) {
@@ -64,34 +62,25 @@ class SeeAllFragment : Fragment(R.layout.see_all_fragment) {
     }
 
     private fun registerClickEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                seeAllAdapter?.itemClickEvent?.collect {
-                    when (it) {
-                        is PlaylistItem.CharacterItem -> {
-                            homeNavigator.navigateTo(Screen.CharacterDetails(it.id))
-                        }
-                        is PlaylistItem.EpisodeItem -> {
-                            homeNavigator.navigateTo(Screen.EpisodeDetails(it.id))
-                        }
-                        else -> {}
-                    }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, seeAllAdapter?.itemClickEvent) {
+            when (it) {
+                is PlaylistItem.CharacterItem -> {
+                    homeNavigator.navigateTo(Screen.CharacterDetails(it.id))
                 }
+                is PlaylistItem.EpisodeItem -> {
+                    homeNavigator.navigateTo(Screen.EpisodeDetails(it.id))
+                }
+                else -> {}
             }
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                seeAllAdapter?.playButtonClickEvent?.collect {
-                    when (it) {
-                        is PlaylistItem.EpisodeItem -> {
-                            if (it.id != castVideoService.castedVideoId) {
-                                homeNavigator.navigateTo(Screen.VideoPlayer(it.id))
-                            }
-                        }
-                        else -> {}
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, seeAllAdapter?.playButtonClickEvent) {
+            when (it) {
+                is PlaylistItem.EpisodeItem -> {
+                    if (it.id != castVideoService.castedVideoId) {
+                        homeNavigator.navigateTo(Screen.VideoPlayer(it.id))
                     }
                 }
+                else -> {}
             }
         }
     }

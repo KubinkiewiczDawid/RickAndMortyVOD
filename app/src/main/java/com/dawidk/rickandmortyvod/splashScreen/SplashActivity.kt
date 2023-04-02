@@ -7,16 +7,18 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import com.dawidk.common.errorHandling.ErrorDialogFragment
+import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
+import com.dawidk.core.domain.model.AccountInfo
+import com.dawidk.registration.RegistrationActivity
 import com.dawidk.rickandmortyvod.ACCOUNT_INFO_KEY
 import com.dawidk.rickandmortyvod.MainActivity
 import com.dawidk.rickandmortyvod.databinding.ActivitySplashBinding
 import com.dawidk.rickandmortyvod.splashScreen.state.SplashAction
+import com.dawidk.rickandmortyvod.splashScreen.state.SplashEvent
 import com.dawidk.rickandmortyvod.splashScreen.state.SplashState
-import com.dawidk.common.errorHandling.ErrorDialogFragment
-import com.dawidk.common.utils.NetworkMonitor
-import com.dawidk.core.domain.model.AccountInfo
-import com.dawidk.registration.RegistrationActivity
 import com.dawidk.videoplayer.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -69,6 +71,7 @@ class SplashActivity : AppCompatActivity(),
 
         binding.rickAndMortyLogo.startAnimation(rotateAnimation)
         registerStateListener()
+        registerEventListener()
         checkInternetConnection()
     }
 
@@ -78,53 +81,57 @@ class SplashActivity : AppCompatActivity(),
     }
 
     private fun registerStateListener() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect {
-                    when (it) {
-                        is SplashState.SignedIn -> {
-                            isUserSignedIn = true
-                        }
-                        is SplashState.NotSignedIn -> {
-                            isUserSignedIn = false
-                        }
-                        is SplashState.Error -> {
-                            activityScope.cancel()
-                            showError(it.exception)
-                        }
-                        else -> {}
-                    }
+        this.collectFromState(Lifecycle.State.STARTED, viewModel.state) {
+            when (it) {
+                is SplashState.SignedIn -> {
+                    isUserSignedIn = true
+                }
+                is SplashState.NotSignedIn -> {
+                    isUserSignedIn = false
+                }
+                is SplashState.Error -> {
+                    activityScope.cancel()
+                    showError(it.exception)
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun registerEventListener() {
+        this.collectFromState(Lifecycle.State.STARTED, viewModel.event) {
+            when (it) {
+                is SplashEvent.NavigateToNextScreen -> {
+                    navigateToNextScreen()
                 }
             }
         }
     }
 
+    private fun navigateToNextScreen() {
+        if (isUserSignedIn) {
+            activityScope.launch {
+                startMainActivity()
+            }
+        } else {
+            activityScope.launch {
+                startRegistrationActivity()
+            }
+        }
+    }
+
     private fun checkInternetConnection() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                networkMonitor.state.collect {
-                    activityScope = CoroutineScope(Dispatchers.Main)
-                    when (it) {
-                        true -> {
-                            viewModel.updateCache()
-                            viewModel.saveEpisodesCount()
-                            if (isUserSignedIn) {
-                                activityScope.launch {
-                                    startMainActivity()
-                                }
-                            } else {
-                                activityScope.launch {
-                                    startRegistrationActivity()
-                                }
-                            }
-                        }
-                        false -> {
-                            activityScope.cancel()
-                            showError(Throwable(getString(R.string.no_internet_error_message)))
-                        }
-                        else -> {}
-                    }
+        this.collectFromState(Lifecycle.State.STARTED, networkMonitor.state) {
+            activityScope = CoroutineScope(Dispatchers.Main)
+            when (it) {
+                true -> {
+                    viewModel.onAction(SplashAction.PrepareData)
                 }
+                false -> {
+                    activityScope.cancel()
+                    showError(Throwable(getString(R.string.no_internet_error_message)))
+                }
+                else -> {}
             }
         }
     }

@@ -7,6 +7,8 @@ import com.dawidk.core.executors.FetchCharactersListExecutor
 import com.dawidk.core.executors.FetchEpisodesListExecutor
 import com.dawidk.core.executors.FetchLocationsListExecutor
 import com.dawidk.search.model.SearchItem
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -21,25 +23,33 @@ class SearchItemsUseCase(
     suspend operator fun invoke(searchQuery: String): Flow<List<SearchItem>> = flow {
         var foundItemsList = emptyList<SearchItem>()
         if (searchQuery.length > MIN_QUERY_LENGTH) {
-            val charactersList =
-                fetchCharactersListExecutor.getCharactersList(CharacterFilter(name = searchQuery))
-                    .map {
-                        val (id, name, _, _, _, _, _, _, image) = it
-                        SearchItem.CharacterItem(id, name, image)
-                    }
-            val locationsList = fetchLocationsListExecutor.getLocationsList(
-                filter = LocationFilter(name = searchQuery)
-            ).results
-                .map {
-                    SearchItem.LocationItem(it.id, it.name)
+            coroutineScope {
+                val charactersListDeferred = async {
+                    fetchCharactersListExecutor.getCharactersList(CharacterFilter(name = searchQuery))
+                        .map {
+                            val (id, name, _, _, _, _, _, _, image) = it
+                            SearchItem.CharacterItem(id, name, image)
+                        }
                 }
-            val episodesList = fetchEpisodesListExecutor.getEpisodesList(
-                filter = EpisodeFilter(name = searchQuery)
-            ).results
-                .map {
-                    SearchItem.EpisodeItem(it.id, it.name, it.episode, it.characters)
+                val locationsListDeferred = async {
+                    fetchLocationsListExecutor.getLocationsList(
+                        filter = LocationFilter(name = searchQuery)
+                    ).results
+                        .map {
+                            SearchItem.LocationItem(it.id, it.name)
+                        }
                 }
-            foundItemsList = charactersList + locationsList + episodesList
+                val episodesListDeferred = async {
+                    fetchEpisodesListExecutor.getEpisodesList(
+                        filter = EpisodeFilter(name = searchQuery)
+                    ).results
+                        .map {
+                            SearchItem.EpisodeItem(it.id, it.name, it.episode, it.characters)
+                        }
+                }
+                foundItemsList =
+                    charactersListDeferred.await() + locationsListDeferred.await() + episodesListDeferred.await()
+            }
         }
         emit(foundItemsList)
     }

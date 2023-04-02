@@ -6,10 +6,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.viewModelScope
 import com.dawidk.common.ApplicationProvider
 import com.dawidk.common.mvi.BaseViewModel
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.dawidk.common.registration.FirebaseAuthApi
 import com.dawidk.common.registration.GoogleClientApi
 import com.dawidk.core.datastore.UserCredentialsDataStoreRepository
@@ -19,6 +15,10 @@ import com.dawidk.registration.signin.mvi.SignInAction
 import com.dawidk.registration.signin.mvi.SignInEvent
 import com.dawidk.registration.signin.mvi.SignInState
 import com.dawidk.registration.utils.ErrorMessageProvider
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.launch
 
 class SignInViewModel(
@@ -42,12 +42,10 @@ class SignInViewModel(
             )
             is SignInAction.HandleError -> updateState(SignInState.Error(action.error))
             is SignInAction.NavigateToSignUpScreen -> navigateToSignUpScreen()
-            is SignInAction.SaveCredentials -> viewModelScope.launch {
-                onEmailSignUpSuccessful(
+            is SignInAction.SaveCredentials -> onEmailSignUpSuccessful(
                     action.userId,
                     action.email
                 )
-            }
             is SignInAction.SignInUnsuccessful -> updateState(SignInState.CredentialsError(action.exception))
             is SignInAction.ClearErrorMessages -> clearErrorMessages()
         }
@@ -55,7 +53,7 @@ class SignInViewModel(
 
     private fun getLastSignedIn() {
         GoogleSignIn.getLastSignedInAccount(applicationProvider.getApplication())?.let {
-            viewModelScope.launch { onRegisterComplete(it) }
+            onRegisterComplete(it)
         }
     }
 
@@ -66,22 +64,24 @@ class SignInViewModel(
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-            viewModelScope.launch { onRegisterComplete(account) }
+            onRegisterComplete(account)
         } catch (e: ApiException) {
             Log.e("register", "signInResult:failed code=" + e.stackTraceToString())
         }
     }
 
-    private suspend fun onRegisterComplete(googleSignInAccount: GoogleSignInAccount) {
-        clearUserCredentials()
-        viewModelScope.launch { saveUserCredentials(googleSignInAccount.mapToAccountInfo()) }.join()
-
-        emitEvent(SignInEvent.NavigateToHomeScreen)
+    private fun onRegisterComplete(googleSignInAccount: GoogleSignInAccount) {
+        viewModelScope.launch {
+            launch {
+                clearUserCredentials()
+                saveUserCredentials(googleSignInAccount.mapToAccountInfo())
+            }.join()
+            emitEvent(SignInEvent.NavigateToHomeScreen)
+        }
     }
 
     private fun signInWithGoogle(resultLauncher: ActivityResultLauncher<Intent>) {
         val signInIntent: Intent = googleClientApi.getSignedInIntent()
-
         resultLauncher.launch(signInIntent)
     }
 
@@ -115,26 +115,26 @@ class SignInViewModel(
         return true
     }
 
-    private suspend fun onEmailSignUpSuccessful(userId: String, email: String) {
-        viewModelScope.launch { saveUserCredentials(AccountInfo(userId, email, email)) }.join()
-        emitEvent(SignInEvent.NavigateToHomeScreen)
-    }
-
     private fun navigateToSignUpScreen() {
         emitEvent(SignInEvent.NavigateToSignUpScreen)
     }
 
-    private suspend fun saveUserCredentials(accountInfo: AccountInfo) {
+    private fun onEmailSignUpSuccessful(userId: String, email: String) {
         viewModelScope.launch {
-            userCredentialsDataStoreRepository.updateUserEmail(accountInfo.email)
-            userCredentialsDataStoreRepository.updateUserDisplayName(accountInfo.displayName)
-            userCredentialsDataStoreRepository.updateUserId(accountInfo.id)
-        }.join()
+            launch {
+                saveUserCredentials(AccountInfo(userId, email, email))
+            }.join()
+            emitEvent(SignInEvent.NavigateToHomeScreen)
+        }
     }
 
-    private fun clearUserCredentials() {
-        viewModelScope.launch {
-            userCredentialsDataStoreRepository.clearUserCredentials()
-        }
+    private suspend fun clearUserCredentials() {
+        userCredentialsDataStoreRepository.clearUserCredentials()
+    }
+
+    private suspend fun saveUserCredentials(accountInfo: AccountInfo) {
+        userCredentialsDataStoreRepository.updateUserEmail(accountInfo.email)
+        userCredentialsDataStoreRepository.updateUserDisplayName(accountInfo.displayName)
+        userCredentialsDataStoreRepository.updateUserId(accountInfo.id)
     }
 }

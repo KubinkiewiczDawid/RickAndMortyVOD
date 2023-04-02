@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,14 +11,14 @@ import com.dawidk.common.binding.viewBinding
 import com.dawidk.common.errorHandling.ErrorDialogFragment
 import com.dawidk.common.mvi.BaseFragment
 import com.dawidk.common.utils.NetworkMonitor
+import com.dawidk.common.utils.collectFromState
 import com.dawidk.episodes.R
 import com.dawidk.episodes.databinding.EpisodeDetailsFragmentBinding
-import com.dawidk.episodes.episodeDetails.navigation.EpisodeDetailsNavigator
-import com.dawidk.episodes.episodeDetails.navigation.Screen
 import com.dawidk.episodes.episodeDetails.mvi.EpisodeDetailsAction
 import com.dawidk.episodes.episodeDetails.mvi.EpisodeDetailsEvent
 import com.dawidk.episodes.episodeDetails.mvi.EpisodeDetailsState
-import kotlinx.coroutines.launch
+import com.dawidk.episodes.episodeDetails.navigation.EpisodeDetailsNavigator
+import com.dawidk.episodes.episodeDetails.navigation.Screen
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -90,19 +88,11 @@ class EpisodeDetailsFragment :
     }
 
     private fun registerClickEventListener() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                episodeDetailsAdapter?.clickEvent?.collect {
-                    viewModel.onAction(EpisodeDetailsAction.NavigateToCharacterDetailsScreen(it.id))
-                }
-            }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, episodeDetailsAdapter?.clickEvent) {
+            viewModel.onAction(EpisodeDetailsAction.NavigateToCharacterDetailsScreen(it.id))
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                episodeDetailsAdapter?.episodePlayClickEvent?.collect {
-                    viewModel.onAction(EpisodeDetailsAction.NavigateToVideoPlayerScreen(episodeId))
-                }
-            }
+        viewLifecycleOwner.collectFromState(Lifecycle.State.STARTED, episodeDetailsAdapter?.episodePlayClickEvent) {
+            viewModel.onAction(EpisodeDetailsAction.NavigateToVideoPlayerScreen(episodeId))
         }
     }
 

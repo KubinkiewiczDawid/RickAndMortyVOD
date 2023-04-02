@@ -47,14 +47,10 @@ class SearchViewModel(
     }
 
     private fun navigateToCharacterDetailsScreen(id: String) {
-        viewModelScope.launch {
-            emitEvent(SearchEvent.NavigateToCharacterDetailsScreen(id))
-        }
+        emitEvent(SearchEvent.NavigateToCharacterDetailsScreen(id))
     }
 
     private fun navigateToEpisodeDetailsScreen(id: String) {
-        viewModelScope.launch {
-            emitEvent(SearchEvent.NavigateToEpisodeDetailsScreen(id))
-        }
+        emitEvent(SearchEvent.NavigateToEpisodeDetailsScreen(id))
     }
 }

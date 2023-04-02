@@ -11,7 +11,7 @@ object Versions {
     const val APOLLO_VERSION = "2.5.14"
     const val KOIN_VERSION = "3.0.1"
     const val COROUTINES_VERSION = "1.6.2"
-    const val LOGGING_INTERCEPTOR_VERSION = "4.2.1"
+    const val LOGGING_INTERCEPTOR_VERSION = "4.9.1"
     const val LIFCECYCLE_VIEWMODEL_VERSION = "2.2.0"
     const val MOCKK_VERSION = "1.11.0"
     const val COIL_VERSION = "1.3.2"

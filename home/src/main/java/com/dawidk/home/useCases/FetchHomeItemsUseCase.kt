@@ -3,9 +3,9 @@ package com.dawidk.home.useCases
 import com.dawidk.core.datastore.HomeScreenDataStoreRepository
 import com.dawidk.home.model.HomeItems
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -17,12 +17,12 @@ class FetchHomeItemsUseCase(
     private val homeScreenDataStoreRepository: HomeScreenDataStoreRepository
 ) {
 
-    operator fun invoke(): Flow<HomeItems> = flow {
-        homeScreenDataStoreRepository.homeScreenFlow.collect {
+    operator fun invoke(): Flow<HomeItems> = channelFlow {
+        homeScreenDataStoreRepository.homeScreenFlow.collectLatest {
             fetchCarouselItemsUseCase().combine(fetchPlaylistsUseCase()) { carouselItems, playlistItems ->
                 HomeItems(carouselItems, playlistItems)
             }.collect { homeItems ->
-                emit(homeItems)
+                send(homeItems)
             }
         }
     }
